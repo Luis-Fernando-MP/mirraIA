@@ -53,3 +53,15 @@
     }
   }
 }
+
+@mixin bigScreen($bigMin: false) {
+  @if ($bigMin) {
+    @media screen and (min-width: $extra-large-screen) and (max-width: $big-screen) {
+      @content;
+    }
+  } @else {
+    @media screen and (max-width: $big-screen) {
+      @content;
+    }
+  }
+}

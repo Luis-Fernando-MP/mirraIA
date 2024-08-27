@@ -1,9 +1,24 @@
 @use '@/sass/config/vars' as v;
 @use '@/sass/utils/defs' as d;
+@import 'mobile';
 
 .dashboard {
   padding: v.$padding;
   width: 100%;
   height: 100%;
   @include d.flex();
+  &-container {
+    @include d.flex($dir: row, $ali: center);
+    height: 100%;
+    overflow: auto hidden;
+    position: relative;
+    width: 100%;
+  }
+  &-body {
+    padding: v.$padding;
+    width: 100%;
+    height: 100%;
+    @include v.border();
+    border-radius: v.$radius;
+  }
 }

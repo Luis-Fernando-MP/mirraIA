@@ -20,8 +20,10 @@ const Dashboard = ({ children, user }: IDashboard): JSX.Element => {
   return (
     <main className='dashboard'>
       <Header />
-      <Nav />
-      <section className='body'>{children}</section>
+      <section className='dashboard-container'>
+        <Nav />
+        <section className='dashboard-body'>{children}</section>
+      </section>
     </main>
   )
 }

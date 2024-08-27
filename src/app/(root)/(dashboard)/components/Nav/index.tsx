@@ -1,25 +1,33 @@
-import Link from 'next/link'
-import type { JSX } from 'react'
+'use client'
 
+import useNav from '@/shared/hooks/useNav'
+import { Menu, XIcon } from 'lucide-react'
+import Link from 'next/link'
+import { type JSX } from 'react'
+
+import './nav.scss'
 import { navLinks } from './navLinks'
 
 const Nav = (): JSX.Element => {
+  const { getClass, pathname, show, toggleShow } = useNav()
+
   return (
-    <nav className='flex w-full items-center justify-center gap-2'>
-      {navLinks.map(link => {
-        const { Icon, label, route } = link
-        return (
-          <Link
-            href={route}
-            key={route}
-            className='flex items-center gap-2 rounded-lg bg-slate-300 p-2'
-          >
-            <p>{label}</p>
-            <Icon />
-          </Link>
-        )
-      })}
-    </nav>
+    <>
+      <button className='dsNav-hamburger' onClick={toggleShow}>
+        {show ? <XIcon /> : <Menu />}
+      </button>
+      <nav className={`dsNav ${getClass()}`}>
+        {navLinks.map(link => {
+          const { Icon, label, route } = link
+          const isActive = pathname === route ? 'active' : ''
+          return (
+            <Link className={`dsNav-item ${isActive}`} href={route} key={route} title={label}>
+              <Icon />
+            </Link>
+          )
+        })}
+      </nav>
+    </>
   )
 }
 

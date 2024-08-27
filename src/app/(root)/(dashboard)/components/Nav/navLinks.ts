@@ -1,4 +1,3 @@
-import { UserButton } from '@clerk/nextjs'
 import {
   BaggageClaimIcon,
   BookImageIcon,
@@ -44,10 +43,5 @@ export const navLinks = [
     label: 'Comprar Créditos',
     route: '/credits',
     Icon: BaggageClaimIcon
-  },
-  {
-    label: 'Perfil',
-    route: '/profile',
-    Icon: UserButton
   }
 ]

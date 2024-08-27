@@ -1,0 +1,33 @@
+@use '@/sass/config/vars' as v;
+@use '@/sass/utils/defs' as d;
+
+.dsNav {
+  @include d.flex($ali: center);
+  height: auto;
+  width: 50px;
+  @include v.border();
+  padding: v.$padding * 4 v.$padding;
+  border-radius: v.$radius;
+  &-item {
+    padding: 8px;
+    border-radius: 4px;
+    &.active {
+      background-color: v.$tn1;
+      color: v.$bg1;
+    }
+  }
+  &,
+  &-hamburger {
+    transition: all 0.3s cubic-bezier(0.25, 0.75, 0.5, 1.25);
+  }
+  &-hamburger {
+    position: absolute;
+    @include v.border;
+    visibility: hidden;
+    opacity: 0;
+    bottom: 30px;
+    left: -50px;
+    padding: 5px;
+    border-radius: 5px;
+  }
+}

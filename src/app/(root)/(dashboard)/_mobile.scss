@@ -1,0 +1,41 @@
+@use '@/sass/config/vars' as v;
+@use '@/sass/utils/defs' as d;
+@use '@/sass/utils/media' as m;
+
+@include m.extraLargeScreen() {
+  .dashboard {
+    .dsNav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: -50px;
+      transition: left 0.3s cubic-bezier(0.25, 0.75, 0.5, 1.25);
+      &.show-menu {
+        left: 20px;
+      }
+      &-hamburger {
+        left: 30px;
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+}
+
+@include m.mediumScreen() {
+  .dashboard {
+  }
+}
+
+@include m.smallScreen() {
+  .dashboard {
+    .dsHeader {
+      align-items: center;
+      flex-wrap: wrap;
+      gap: v.$padding v.$padding * 3;
+      justify-content: space-evenly;
+      padding: v.$padding * 2 10px;
+      padding-bottom: v.$padding * 3;
+    }
+  }
+}

@@ -1,16 +1,16 @@
 'use server'
 
-import { handleError } from '@/shared/utils'
+import { handleError } from '@/shared/lib/utils'
 import { revalidatePath } from 'next/cache'
 
 import db from '..'
 import User from '../models/User'
+import IUser from '../types/user.type'
 
-export async function createUser(user: any) {
+export async function createUser(user: IUser) {
   try {
     await db()
-    const newUser = new User(user)
-    const isCreated = await newUser.save()
+    const isCreated = await User.create(user)
     if (!isCreated) throw new Error('Ups!! there are an Error to create new user')
     return isCreated
   } catch (error) {

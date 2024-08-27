@@ -1,0 +1,10 @@
+@use '@/sass/config/vars' as v;
+
+@mixin border($size: 1.5px, $bg: v.$tn1, $s: 0.2s) {
+  transition: all $s ease-in;
+  scale: 1;
+  &:hover {
+    scale: 0.99;
+    @content;
+  }
+}

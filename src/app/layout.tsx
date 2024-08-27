@@ -1,15 +1,15 @@
+import { MontserratFont, RobotoFont } from '@/shared/lib/fonts'
+import { Toaster } from '@pheralb/toast'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import type { JSX, ReactNode } from 'react'
 
 import './globals.css'
+import './index.scss'
 import Providers from './providers'
 
 interface IRootLayout {
   children?: Readonly<ReactNode[]> | null | Readonly<ReactNode>
 }
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'JU IMAGES',
@@ -22,11 +22,12 @@ export const metadata: Metadata = {
   }
 }
 
-const RootLayout = ({ children }: IRootLayout): JSX.Element => {
+const RootLayout = async ({ children }: IRootLayout): Promise<JSX.Element> => {
   return (
     <html lang='es'>
-      <body className={inter.className}>
+      <body className={`${MontserratFont.className} ${RobotoFont.className}`}>
         <Providers>{children}</Providers>
+        <Toaster position='top-center' />
       </body>
     </html>
   )

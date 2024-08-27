@@ -1,0 +1,199 @@
+@use '@/sass/utils/scrollbar';
+@use '@/sass/config/vars' as *;
+@use '@/sass/utils/media' as m;
+@use '@/sass/utils/text' as t;
+@use '@/sass/utils/hover' as h;
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  outline: none;
+  padding: 0;
+}
+
+body {
+  @extend %scroll-hidden;
+  background-color: $bg2;
+  color: $fn1, $fontBase;
+  font-family: $font1;
+  font-size: $family-size;
+  height: 100dvh;
+  line-height: 1.25;
+  overflow: hidden auto;
+  position: relative;
+  width: 100dvw;
+}
+
+$listOfFontsSize: (
+  '.title': $fXl,
+  'h1': $fH1,
+  'h2': $fH2,
+  'h3': $fH3,
+  'h4': $fH4,
+  'h5': $fH5,
+  'p': $fP,
+  'span': $fSpan,
+  'small': $fSmall
+);
+
+@each $tag, $value in $listOfFontsSize {
+  #{$tag} {
+    font-size: $value;
+  }
+}
+
+h1,
+h2,
+h3 {
+  color: $fn1;
+  font-family: $font1;
+}
+
+h4,
+h5,
+p,
+a,
+input,
+textarea,
+button,
+select {
+  color: $fn2;
+  font-family: $font2;
+}
+
+span,
+small {
+  color: $fn2;
+  font-family: $font3;
+  font-weight: 400;
+}
+
+h1 {
+  font-weight: 900;
+}
+
+h2 {
+  font-weight: 800;
+}
+
+h3 {
+  font-weight: 700;
+}
+
+h4,
+h5 {
+  font-weight: 500;
+}
+
+p,
+input,
+textarea,
+button,
+select {
+  font-weight: 400;
+  font-size: $fP;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  text-wrap: balance;
+}
+
+p,
+a,
+span,
+small,
+input,
+textarea,
+button,
+select {
+  text-wrap: pretty;
+}
+
+textarea {
+  resize: none;
+  @extend %scroll-hidden;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  @include h.border;
+}
+
+small {
+  font-style: italic;
+}
+
+.btn {
+  padding: 8px 10px;
+  border-radius: $radius;
+  @include h.border;
+}
+
+svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+@include m.smallerScreen() {
+  body {
+    font-size: 10px;
+  }
+}
+
+.gr {
+  @include t.textGradient;
+}
+
+.bgr {
+  background-image: $gr1;
+  color: $bg1;
+  opacity: 1;
+  border: 2px solid transparent;
+  font-size: $fH5;
+  font-weight: 400;
+  &.inactive {
+    background-image: none;
+    background-color: $bg3;
+    color: $fn1;
+    user-select: none;
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  &.big {
+    text-align: center;
+    font-size: $fH5;
+    font-weight: 500;
+  }
+}
+
+.logo {
+  min-width: 60px;
+  height: 100%;
+  object-fit: cover;
+  padding: 5px 0;
+  display: block;
+  &-container {
+    text-align: center;
+  }
+}
+
+//clerk
+.cl-rootBox button:focus {
+  box-shadow: none;
+}

@@ -1,0 +1,25 @@
+@use '@/sass/config/vars' as v;
+@use '@/sass/utils/defs' as d;
+
+.dsHeader {
+  @include d.flex($dir: row);
+  @include v.border();
+  border-radius: v.$radius;
+  box-shadow: v.$sha1;
+  justify-content: space-between;
+  min-height: 50px;
+  padding: v.$padding;
+  width: 100%;
+  &-box {
+    @include d.flex($dir: row, $ali: center, $gap: 0px);
+    &.user {
+      @include v.border(v.$bg2);
+      border-radius: 5px;
+      padding: 3px 5px;
+    }
+  }
+  .logo {
+    height: 35px;
+    width: 35px;
+  }
+}

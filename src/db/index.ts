@@ -1,4 +1,4 @@
-import { DB_URL } from '@/shared/constants'
+import { DB_URL } from '@/shared/lib/constants'
 import mongoose, { Mongoose } from 'mongoose'
 
 interface IConnection {

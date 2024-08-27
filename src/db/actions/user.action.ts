@@ -1,6 +1,6 @@
 'use server'
 
-import { handleError } from '@/shared/utils'
+import { handleError } from '@/shared/lib/utils'
 import { revalidatePath } from 'next/cache'
 
 import db from '..'

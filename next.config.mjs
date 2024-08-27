@@ -1,4 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  reactStrictMode: true,
+  images: {
+    loader: 'cloudinary',
+    path: 'https://res.cloudinary.com/dkbp71nof/image/upload'
+  }
+}
 
-export default nextConfig;
+export default nextConfig

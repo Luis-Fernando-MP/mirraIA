@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { createUser, deleteUser, updateUser } from '@/db/actions/user.action'
 import IUser from '@/db/types/user.type'
-import { handleError } from '@/shared/utils'
+import { handleError } from '@/shared/lib/utils'
 import { WebhookEvent } from '@clerk/nextjs/server'
 import { headers } from 'next/headers'
 import { NextResponse } from 'next/server'

@@ -5,8 +5,7 @@ import { CLD_PRESET } from '@/shared/lib/constants'
 import { generateImageName } from '@/shared/lib/utils'
 import { toast } from '@pheralb/toast'
 import axios from 'axios'
-import { cloudinaryLoader } from 'next-cloudinary'
-import { type JSX, useMemo, useState } from 'react'
+import { type JSX, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import 'two-up-element'
 
@@ -14,14 +13,12 @@ import CustomDropzone from './Dropzone'
 import { IRestoreValidator, restoreResolver } from './restore.resolver'
 
 const Form = (): JSX.Element | null => {
-  const { register, handleSubmit, formState, reset, setValue, getValues, watch } =
-    useForm<IRestoreValidator>({
-      mode: 'onChange',
-      resolver: restoreResolver
-    })
-  const { errors: err, isValid } = formState
+  const { register, handleSubmit, formState, reset, setValue } = useForm<IRestoreValidator>({
+    mode: 'onChange',
+    resolver: restoreResolver
+  })
+  const { errors: err } = formState
   const { _id } = userStore()
-  const [image, setImage] = useState<string | null>(null)
   const { startChars, dateChars, randomChars } = useMemo(
     () => generateImageName(String(_id)),
     [_id]
@@ -36,9 +33,9 @@ const Form = (): JSX.Element | null => {
     reset()
   }
 
-  const onSubmit = async (data: IRestoreValidator): void => {
+  const onSubmit = async (data: IRestoreValidator) => {
     console.log('Datos del formulario:', data)
-    const idToast = toast.loading({
+    toast.loading({
       text: 'Subiendo imagen',
       id: 2001
     })

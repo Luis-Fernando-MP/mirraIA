@@ -1,8 +1,7 @@
 import { getUserById } from '@/db/actions/user.action'
 import { auth } from '@clerk/nextjs/server'
 import type { Metadata } from 'next'
-import Image from 'next/image'
-import { type JSX, type ReactNode, use } from 'react'
+import { type JSX, type ReactNode } from 'react'
 
 import Dashboard from './(dashboard)/Dashboard'
 import Landing from './(landing)/Landing'

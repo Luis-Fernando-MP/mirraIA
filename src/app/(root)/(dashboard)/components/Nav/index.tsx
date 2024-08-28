@@ -1,12 +1,12 @@
 'use client'
 
+import dashboardLinks from '@/dashboard/dashboardLinks'
 import useNav from '@/shared/hooks/useNav'
 import { Menu, XIcon } from 'lucide-react'
 import Link from 'next/link'
 import { type JSX } from 'react'
 
 import './nav.scss'
-import { navLinks } from './navLinks'
 
 const Nav = (): JSX.Element => {
   const { getClass, pathname, show, toggleShow } = useNav()
@@ -17,7 +17,7 @@ const Nav = (): JSX.Element => {
         {show ? <XIcon /> : <Menu />}
       </button>
       <nav className={`dsNav ${getClass()}`}>
-        {navLinks.map(link => {
+        {Object.values(dashboardLinks).map(link => {
           const { Icon, label, route } = link
           const isActive = pathname === route ? 'active' : ''
           return (

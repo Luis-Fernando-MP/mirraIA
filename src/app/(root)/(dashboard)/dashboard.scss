@@ -15,10 +15,14 @@
     width: 100%;
   }
   &-body {
-    padding: v.$padding;
-    width: 100%;
-    height: 100%;
+    @include d.flex($ali: center);
     @include v.border();
     border-radius: v.$radius;
+    height: auto;
+    justify-content: flex-start;
+    min-height: 100%;
+    overflow: auto hidden;
+    padding: v.$padding 10%;
+    width: 100%;
   }
 }

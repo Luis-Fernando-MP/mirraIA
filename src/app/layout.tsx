@@ -1,4 +1,4 @@
-import { MontserratFont, RobotoFont } from '@/shared/lib/fonts'
+import { MontserratFont, PlayFairFont, RobotoFont } from '@/shared/lib/fonts'
 import { Toaster } from '@pheralb/toast'
 import type { Metadata } from 'next'
 import type { JSX, ReactNode } from 'react'
@@ -25,7 +25,9 @@ export const metadata: Metadata = {
 const RootLayout = async ({ children }: IRootLayout): Promise<JSX.Element> => {
   return (
     <html lang='es'>
-      <body className={`${MontserratFont.className} ${RobotoFont.className}`}>
+      <body
+        className={`${MontserratFont.variable} ${RobotoFont.variable} ${PlayFairFont.variable}`}
+      >
         <Providers>{children}</Providers>
         <Toaster position='top-center' />
       </body>

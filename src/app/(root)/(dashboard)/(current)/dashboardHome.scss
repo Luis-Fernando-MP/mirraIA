@@ -13,7 +13,8 @@
       #7e57e7 100%
     );
     border-radius: v.$radius;
-    height: 250px;
+    min-height: 250px;
+    height: auto;
     justify-content: center;
     width: 100%;
     h1,

@@ -2,6 +2,14 @@
 @use '@/sass/utils/defs' as d;
 @use '@/sass/utils/media' as m;
 
+@include m.bigScreen() {
+  .dashboard {
+    &-body {
+      padding: v.$padding 5%;
+    }
+  }
+}
+
 @include m.extraLargeScreen() {
   .dashboard {
     .dsNav {
@@ -19,11 +27,9 @@
         visibility: visible;
       }
     }
-  }
-}
-
-@include m.mediumScreen() {
-  .dashboard {
+    &-body {
+      padding: v.$padding;
+    }
   }
 }
 

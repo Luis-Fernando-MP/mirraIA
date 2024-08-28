@@ -2,6 +2,7 @@ import type { JSX } from 'react'
 
 import RecentTransform from './components/RecentTransform'
 import './dashboardHome.scss'
+import './mobile.scss'
 
 const Page = (): JSX.Element => {
   return (

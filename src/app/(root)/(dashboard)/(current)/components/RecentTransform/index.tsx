@@ -4,7 +4,8 @@ import dashboardLinks from '@/dashboard/dashboardLinks'
 import Link from 'next/link'
 import type { JSX } from 'react'
 
-import './recentTransform.scss'
+import './style.scss'
+import './userMobile.scss'
 
 const RecentTransform = (): JSX.Element => {
   const recentTransforms = getLocalStorage<any>('recentTransforms')

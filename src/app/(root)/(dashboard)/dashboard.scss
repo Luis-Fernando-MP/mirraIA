@@ -1,6 +1,5 @@
 @use '@/sass/config/vars' as v;
 @use '@/sass/utils/defs' as d;
-@import 'mobile';
 
 .dashboard {
   padding: v.$padding;
@@ -10,18 +9,18 @@
   &-container {
     @include d.flex($dir: row, $ali: center);
     height: 100%;
-    overflow: auto hidden;
+    overflow: auto;
     position: relative;
     width: 100%;
   }
   &-body {
     @include d.flex($ali: center);
-    @include v.border();
+    // @include v.border();
     border-radius: v.$radius;
     height: auto;
     justify-content: flex-start;
     min-height: 100%;
-    overflow: auto hidden;
+    overflow: auto;
     padding: v.$padding 10%;
     width: 100%;
   }

@@ -11,7 +11,7 @@ const Header = (): JSX.Element => {
       <section className='dsHeader-box'>
         <Logo />
         <div className='logo-info'>
-          <h3>MIRA IA</h3>
+          <h3>MIRRA IA</h3>
           <span>JUSI GROUP</span>
         </div>
       </section>

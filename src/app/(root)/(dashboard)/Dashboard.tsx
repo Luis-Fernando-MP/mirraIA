@@ -6,6 +6,7 @@ import type { JSX, ReactNode } from 'react'
 import Header from './components/Header'
 import Nav from './components/Nav'
 import './dashboard.scss'
+import './mobile.scss'
 import userStore from './user.state'
 
 interface IDashboard {

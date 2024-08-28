@@ -1,0 +1,39 @@
+@use '@/sass/config/vars' as v;
+@use '@/sass/utils/defs' as d;
+
+.dsb {
+  &Header {
+    @include d.flex($ali: center);
+    background-image: linear-gradient(
+      -220deg,
+      #e7dfff 0%,
+      #b89dfc 16%,
+      #ad97e6 44%,
+      #936df7 61% 81%,
+      #7e57e7 100%
+    );
+    border-radius: v.$radius;
+    min-height: 250px;
+    height: auto;
+    justify-content: center;
+    width: 100%;
+    h1,
+    h3 {
+      color: v.$bg1;
+      width: 70%;
+      text-align: center;
+    }
+    h1 {
+      text-transform: uppercase;
+      font-size: 3em;
+    }
+    h3 {
+      font-weight: 300;
+    }
+  }
+  &SubTitle {
+    width: 100%;
+    font-size: v.$fH1;
+    font-weight: 500;
+  }
+}

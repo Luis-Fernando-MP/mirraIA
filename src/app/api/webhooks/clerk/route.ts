@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { createUser, deleteUser, updateUser } from '@/db/actions/user.action'
 import IUser from '@/db/types/user.type'
-import { handleError } from '@/shared/lib/utils'
 import { WebhookEvent } from '@clerk/nextjs/server'
 import { headers } from 'next/headers'
 import { NextResponse } from 'next/server'
@@ -9,7 +8,7 @@ import { Webhook } from 'svix'
 
 import UserEvent from './user.event.type'
 
-export async function POST(req: Request) {
+async function handler(req: Request) {
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET
   if (!WEBHOOK_SECRET) {
     throw new Error('Hey you!! WEBHOOK KEY NOTFOUND 🤓')
@@ -82,7 +81,11 @@ export async function POST(req: Request) {
 
     return new Response('Some...', { status: 200 })
   } catch (error) {
-    handleError(error)
     return new Response('Internal Error', { status: 500 })
   }
 }
+
+export const GET = handler
+export const POST = handler
+export const PUT = handler
+export const DELETE = handler

@@ -1,0 +1,8 @@
+@use '@/sass/utils/defs' as d;
+
+.dCommunityPubs {
+  @include d.flex($dir: row);
+  width: 100%;
+  flex-wrap: wrap;
+  height: max-content;
+}

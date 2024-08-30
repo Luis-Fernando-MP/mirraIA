@@ -8,6 +8,14 @@ import {
   SprayCanIcon
 } from 'lucide-react'
 
+export type TTransformations =
+  | 'restore'
+  | 'extra-fill'
+  | 'object-remove'
+  | 'recolor'
+  | 'fill-remove'
+  | 'buy-credits'
+
 const dashboardLinks = {
   home: {
     label: 'Inicio',
@@ -45,7 +53,7 @@ const dashboardLinks = {
     description:
       'Elimina objetos no deseados de tus imágenes de manera eficiente. Mantén solo lo importante y mejora la composición.'
   },
-  "recolor',": {
+  recolor: {
     label: 'Coloración',
     route: '/transform/recolor',
     Icon: SprayCanIcon,

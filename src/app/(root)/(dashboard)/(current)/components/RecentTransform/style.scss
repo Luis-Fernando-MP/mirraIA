@@ -6,8 +6,8 @@
     @include d.flex($dir: row);
     flex-wrap: wrap;
     max-width: 100%;
-    overflow: hidden;
     width: 100%;
+    height: fit-content;
     &,
     &-item {
       padding: v.$padding;

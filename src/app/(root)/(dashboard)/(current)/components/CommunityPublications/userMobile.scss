@@ -1,0 +1,8 @@
+@use '@/sass/utils/media' as m;
+
+@include m.smallScreen() {
+  .dCommunityPubs {
+    align-items: center;
+    justify-content: center;
+  }
+}

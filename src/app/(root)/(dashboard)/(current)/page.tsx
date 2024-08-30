@@ -1,5 +1,7 @@
-import type { JSX } from 'react'
+import { type JSX, Suspense } from 'react'
 
+import PublicationFilters from './components/PublicationFilters'
+import RecentPublications from './components/RecentPublications'
 import RecentTransform from './components/RecentTransform'
 import './dashboardHome.scss'
 import './mobile.scss'
@@ -14,9 +16,12 @@ const Page = (): JSX.Element => {
           transforma tus ideas en realidad con inteligencia artificial. ¡Exprésate como nunca antes!
         </h3>
       </header>
-      <h2 className='dsbSubTitle'>Transformaciones Recientes ✨</h2>
       <RecentTransform />
       <h2 className='dsbSubTitle'>Creaciones Recientes 🌟 </h2>
+      <PublicationFilters />
+      <Suspense fallback={<p>loading...</p>}>
+        <RecentPublications />
+      </Suspense>
     </>
   )
 }

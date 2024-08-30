@@ -12,7 +12,7 @@ interface IRootLayout {
 }
 
 export const metadata: Metadata = {
-  title: 'JU IMAGES',
+  title: 'Mirra IA',
   description: 'Generador y transformador de imágenes',
   icons: {
     icon: [

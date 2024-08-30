@@ -20,7 +20,7 @@ const Form = (): JSX.Element | null => {
   const { errors: err } = formState
   const { _id } = userStore()
   const { startChars, dateChars, randomChars } = useMemo(
-    () => generateImageName(String(_id)),
+    () => generateImageName(JSON.parse(JSON.stringify(_id))),
     [_id]
   )
 

@@ -1,16 +1,19 @@
-@use '@/sass/config/vars' as v;
-@use '@/sass/utils/defs' as d;
 @use '@/sass/utils/media' as m;
 
 @include m.mediumScreen() {
-  .dsbRecentTransform {
-    &-item {
-      width: 170px;
-      overflow: hidden;
-      flex-direction: column;
-      &__info p {
-        width: 100%;
-      }
+  .dsbRecentTransform-item {
+    width: 170px;
+    overflow: hidden;
+    flex-direction: column;
+    &__info p {
+      width: 100%;
     }
+  }
+}
+
+@include m.smallScreen() {
+  .dsbRecentTransform {
+    align-items: center;
+    justify-content: center;
   }
 }

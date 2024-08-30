@@ -1,13 +1,15 @@
 @use '@/sass/config/vars' as v;
 @use '@/sass/utils/defs' as d;
+@use '@/sass/config/index' as i;
 
 .dsNav {
   @include d.flex($ali: center);
-  height: auto;
+  height: fit-content;
   width: 50px;
   @include v.border();
   padding: v.$padding * 4 v.$padding;
   border-radius: v.$radius;
+  z-index: i.$nav;
   &-item {
     padding: 8px;
     border-radius: 4px;
@@ -21,6 +23,7 @@
     transition: all 0.3s cubic-bezier(0.25, 0.75, 0.5, 1.25);
   }
   &-hamburger {
+    z-index: i.$nav;
     position: absolute;
     @include v.border;
     visibility: hidden;

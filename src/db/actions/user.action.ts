@@ -12,7 +12,7 @@ export async function createUser(user: IUser) {
     await db()
     const isCreated = await User.create(user)
     if (!isCreated) throw new Error('Ups!! there are an Error to create new user')
-    return isCreated
+    return JSON.parse(JSON.stringify(isCreated)) as IUser
   } catch (error) {
     handleError(error)
   }
@@ -23,7 +23,7 @@ export async function getUserById(clerkId: string) {
     await db()
     const user = await User.findOne({ clerkId })
     if (!user) throw new Error('The user not found')
-    return user
+    return JSON.parse(JSON.stringify(user)) as IUser
   } catch (error) {
     handleError(error)
   }
@@ -36,7 +36,7 @@ export async function updateUser(clerkId: string, user: any) {
       new: true
     })
     if (!updatedUser) throw new Error('User update failed')
-    return updatedUser
+    return JSON.parse(JSON.stringify(updateUser)) as IUser
   } catch (error) {
     handleError(error)
   }
@@ -50,7 +50,7 @@ export async function deleteUser(clerkId: string) {
       throw new Error('Fail to deled user')
     }
     revalidatePath('/')
-    return isDeleted
+    return JSON.parse(JSON.stringify(isDeleted)) as IUser
   } catch (error) {
     handleError(error)
   }

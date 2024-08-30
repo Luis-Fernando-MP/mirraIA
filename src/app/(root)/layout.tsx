@@ -17,14 +17,17 @@ export const metadata: Metadata = {
 const RootLayout = async ({ children }: IRootLayout): Promise<JSX.Element> => {
   const { userId } = auth()
   let user = null
+
   if (userId) {
-    user = await getUserById(userId)
-    user = JSON.parse(JSON.stringify(user))
+    try {
+      user = await getUserById(userId)
+      user = JSON.parse(JSON.stringify(user))
+    } catch (error) {
+      console.error('Error fetching user:', error)
+    }
   }
-  if (user && userId) {
-    return <Dashboard user={user}>{children}</Dashboard>
-  }
-  return <Landing />
+
+  return user ? <Dashboard user={user}>{children}</Dashboard> : <Landing />
 }
 
 export default RootLayout

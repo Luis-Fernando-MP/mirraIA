@@ -1,0 +1,17 @@
+@use '@/sass/config/vars' as v;
+@use '@/sass/utils/defs' as d;
+
+.dPublicationFilters {
+  width: 100%;
+  padding: v.$padding;
+  @include d.flex($dir: row);
+  &-filter {
+    background-color: v.$bg2;
+    padding: 10px;
+    border-radius: 5px;
+    &.active {
+      background-color: v.$tn1;
+      color: v.$bg1;
+    }
+  }
+}

@@ -9,22 +9,29 @@
   @include d.flex();
   &-container {
     @include d.flex($dir: row, $ali: center);
-    justify-content: center;
     height: 100%;
-    overflow: hidden;
+    justify-content: left;
     position: relative;
     width: 100%;
+    overflow: auto;
+    @extend %scroll-hidden;
   }
   &-body {
-    @include d.flex($ali: center);
-    @include v.border();
-    background-color: blue;
     border-radius: v.$radius;
     height: 100%;
-    justify-content: flex-start;
-    overflow: scroll;
-    padding: v.$padding 10%;
+    justify-content: left;
     width: 100%;
-    @extend %scroll-hidden;
+    position: relative;
+    &.home {
+      padding: v.$padding 10%;
+      box-shadow: v.$sha1;
+      @include d.flex($ali: center);
+      border: 1px solid v.$bg3;
+      background-color: v.$bg1;
+    }
+    &.restore {
+      @include d.flex($ali: center, $dir: row);
+      background-color: v.$bg2;
+    }
   }
 }

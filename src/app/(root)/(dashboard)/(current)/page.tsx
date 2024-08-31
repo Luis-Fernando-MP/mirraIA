@@ -8,7 +8,7 @@ import './mobile.scss'
 
 const Page = (): JSX.Element => {
   return (
-    <>
+    <section className='dashboard-body home'>
       <header className='dsbHeader'>
         <h1>🎨 ¿Qué Planes Tenemos para Hoy? ¿Algo Creativo por Hacer?</h1>
         <h3>
@@ -22,7 +22,7 @@ const Page = (): JSX.Element => {
       <Suspense fallback={<p>loading...</p>}>
         <RecentPublications />
       </Suspense>
-    </>
+    </section>
   )
 }
 

@@ -1,0 +1,14 @@
+@use '@/sass/config/vars' as v;
+@use '@/sass/utils/defs' as d;
+
+.dsRS {
+  &Container {
+    height: auto;
+    min-height: 100%;
+    border-radius: v.$radius;
+    @include v.border;
+    padding: v.$padding;
+    @include d.flex;
+    width: 100%;
+  }
+}

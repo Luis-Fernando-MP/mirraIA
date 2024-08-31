@@ -2,7 +2,6 @@
 @use '@/sass/config/vars' as *;
 @use '@/sass/utils/media' as m;
 @use '@/sass/utils/text' as t;
-@use '@/sass/utils/hover' as h;
 
 *,
 ::before,
@@ -19,9 +18,11 @@ body {
   color: $fn1, $fontBase;
   font-family: $font1;
   font-size: $family-size;
+  min-height: 100dvh;
   height: 100dvh;
+  max-height: 100dvh;
   line-height: 1.25;
-  overflow: hidden auto;
+  overflow: hidden;
   position: relative;
   width: 100dvw;
 }
@@ -125,13 +126,14 @@ ul {
 }
 
 a {
+  display: block;
   text-decoration: none;
 }
 
 button {
   border: none;
   cursor: pointer;
-  @include h.border;
+  @include hoverS;
 }
 
 small {
@@ -141,7 +143,7 @@ small {
 .btn {
   padding: 8px 10px;
   border-radius: $radius;
-  @include h.border;
+  @include hoverS;
 }
 
 svg {

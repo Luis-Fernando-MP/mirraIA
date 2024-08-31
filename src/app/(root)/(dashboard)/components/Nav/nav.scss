@@ -6,10 +6,12 @@
   @include d.flex($ali: center);
   height: fit-content;
   width: 50px;
+  max-width: 60px;
   @include v.border();
   padding: v.$padding * 4 v.$padding;
   border-radius: v.$radius;
   z-index: i.$nav;
+  box-shadow: v.$sha1;
   &-item {
     padding: 8px;
     border-radius: 4px;

@@ -75,3 +75,11 @@ $sha1: 6px 5px 20px -5px $bg3;
     border: 1px solid $bg3;
   }
 }
+@mixin hoverS($s: 0.2s, $scale: 0.99) {
+  transition: all $s ease-in;
+  scale: 1;
+  &:hover {
+    scale: $scale;
+    @content;
+  }
+}

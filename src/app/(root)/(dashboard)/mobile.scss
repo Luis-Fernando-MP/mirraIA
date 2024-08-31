@@ -4,7 +4,7 @@
 
 @include m.bigScreen() {
   .dashboard {
-    &-body {
+    &-body.home {
       padding: v.$padding 5%;
     }
   }
@@ -27,14 +27,14 @@
         visibility: visible;
       }
     }
-    &-body {
+    &-body.home {
       padding: v.$padding;
     }
   }
 }
 
 @include m.smallScreen() {
-  .dashboard {
+  .dashboard.home {
     .dsHeader {
       align-items: center;
       flex-wrap: wrap;

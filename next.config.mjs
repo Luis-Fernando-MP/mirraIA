@@ -2,7 +2,7 @@
 const nextConfig = {
   images: {
     // loader: 'cloudinary',
-    domains: ['img.clerk.com', 'res.cloudinary.com']
+    domains: ['img.clerk.com', 'res.cloudinary.com', 'i.redd.it']
   }
 }
 

@@ -19,7 +19,7 @@ const Nav = (): JSX.Element => {
       <nav className={`dsNav ${getClass()}`}>
         {Object.values(dashboardLinks).map(link => {
           const { Icon, label, route } = link
-          const isActive = pathname === route ? 'active' : ''
+          const isActive = pathname === route || pathname === `${route}/me` ? 'active' : ''
           return (
             <Link className={`dsNav-item ${isActive}`} href={route} key={route} title={label}>
               <Icon />

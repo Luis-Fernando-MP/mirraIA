@@ -1,4 +1,4 @@
-import { Montserrat, Playfair_Display, Roboto } from 'next/font/google'
+import { Montserrat, Roboto, Satisfy } from 'next/font/google'
 
 export const MontserratFont = Montserrat({
   subsets: ['latin'],
@@ -12,8 +12,8 @@ export const RobotoFont = Roboto({
   variable: '--RobotoFont'
 })
 
-export const PlayFairFont = Playfair_Display({
+export const PlayFairFont = Satisfy({
   subsets: ['latin'],
-  weight: ['400', '500', '700', '900'],
+  weight: ['400'],
   variable: '--PlayFairFont'
 })

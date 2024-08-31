@@ -4,6 +4,7 @@ import type { JSX } from 'react'
 
 import TagHero from '../TagHero'
 import './header.scss'
+import './userMobile.scss'
 
 const Header = (): JSX.Element => {
   return (

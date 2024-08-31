@@ -1,0 +1,16 @@
+@use '@/sass/utils/media' as m;
+
+@include m.extraLargeScreen() {
+  .dashboard-body.trsDashboard .dsRSNav {
+    flex-wrap: wrap;
+    width: 100%;
+    min-height: 250px;
+    flex-direction: row;
+    justify-content: center;
+    height: 100%;
+    align-items: flex-start;
+    img {
+      height: 100%;
+    }
+  }
+}

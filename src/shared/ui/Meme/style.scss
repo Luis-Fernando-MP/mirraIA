@@ -1,0 +1,28 @@
+@use '@/sass/config/vars' as v;
+@use '@/sass/utils/defs' as d;
+
+.meme {
+  @include v.hoverS($scale: 0.98);
+  width: 270px;
+  @include d.flex($gap: v.$padding / 2, $ali: center);
+  padding: v.$padding;
+  border-radius: v.$radius;
+  @include v.border(v.$bg2);
+  &-image {
+    border-radius: v.$radius;
+  }
+  &-title,
+  &-info {
+    text-align: center;
+  }
+  &-author {
+    padding: 5px 8px;
+    border-radius: 3px;
+    background-color: v.$bg3;
+    @include d.flex($dir: row, $gap: 5px, $ali: center);
+    p {
+      font-family: v.$font3;
+      font-size: v.$fH5;
+    }
+  }
+}

@@ -1,14 +1,19 @@
 @use '@/sass/config/vars' as v;
 @use '@/sass/utils/defs' as d;
+@use '@/sass/utils/scrollbar' as *;
 
 .dsRS {
   &Container {
     height: auto;
     min-height: 100%;
+    max-height: 100%;
     border-radius: v.$radius;
-    @include v.border;
-    padding: v.$padding;
+    border: 1px solid v.$bg3;
+    padding: v.$padding * 2;
     @include d.flex;
     width: 100%;
+    @extend %scroll-hidden;
+    overflow-y: scroll;
+    background-color: v.$bg1;
   }
 }

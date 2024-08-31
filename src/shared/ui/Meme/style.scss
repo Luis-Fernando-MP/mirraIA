@@ -19,5 +19,10 @@
     padding: 5px 8px;
     border-radius: 3px;
     background-color: v.$bg3;
+    @include d.flex($dir: row, $gap: 5px, $ali: center);
+    p {
+      font-family: v.$font3;
+      font-size: v.$fH5;
+    }
   }
 }

@@ -19,7 +19,10 @@ const Meme = async (): Promise<JSX.Element> => {
         <h3 className='meme-info'>Alégrate un rato 😄</h3>
         <img className='meme-image' src={url} loading='lazy' alt={title} />
         <h3 className='meme-title'>{title}</h3>
-        <p className='meme-author'>{author}</p>
+        <h4 className='meme-author'>
+          <b>Autor: </b>
+          <p>{author}</p>
+        </h4>
       </Link>
     )
   } catch (error) {

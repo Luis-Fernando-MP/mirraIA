@@ -1,0 +1,77 @@
+@use '@/sass/config/vars' as v;
+@use '@/sass/utils/defs' as d;
+
+.dsTransform {
+  width: 100%;
+  height: 100%;
+  @include d.flex($dir: row, $ali: center);
+  &-article {
+    &.requirements {
+      padding: v.$padding 0;
+      width: 350px;
+      min-height: 350px;
+      max-width: 350px;
+      @include d.flex($gap: v.$padding * 0.5);
+    }
+  }
+  &-control {
+    @include d.flex($gap: 5px);
+    border-radius: 5px;
+    &.error {
+      padding: 5px;
+      background-color: #ffe4e6;
+      border: 2px solid #e07a84;
+    }
+    &__error {
+      color: #721c24;
+      width: 100%;
+    }
+  }
+  &-input {
+    width: 100%;
+    @include v.border(v.$bg2);
+    @include d.flex($dir: row, $gap: 10px);
+    border-radius: v.$radius * 0.5;
+    padding: v.$padding * 0.4;
+    &__tag {
+      background-color: v.$bg1;
+      padding: v.$padding * 0.5;
+      border-radius: 3px;
+      width: fit-content;
+      min-width: max-content;
+    }
+    &__field,
+    &__link {
+      width: 100%;
+      background-color: transparent;
+      border-left: 1px solid v.$bg3;
+      padding-left: v.$padding * 0.8;
+    }
+    &__link {
+      @include d.flex;
+      justify-content: center;
+      font-weight: 700;
+    }
+    &.color {
+      flex-direction: column;
+    }
+    &__colors {
+      width: 100%;
+      @include d.flex($dir: row, $gap: v.$padding * 0.5);
+      flex-wrap: wrap;
+      label {
+        width: 30px;
+        height: 30px;
+        border-radius: v.$radius * 0.5;
+        cursor: pointer;
+        input {
+          visibility: hidden;
+        }
+        &:has(input:checked) {
+          border: 5px solid v.$tn1;
+          scale: 0.9;
+        }
+      }
+    }
+  }
+}

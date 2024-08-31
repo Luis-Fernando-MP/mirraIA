@@ -62,6 +62,9 @@ button,
 select {
   color: $fn2;
   font-family: $font2;
+  &:focus {
+    outline: none;
+  }
 }
 
 span,

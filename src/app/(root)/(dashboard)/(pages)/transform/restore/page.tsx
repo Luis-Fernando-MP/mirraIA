@@ -1,7 +1,18 @@
 import type { JSX } from 'react'
 
+import TransformForm from '../components/transformForm'
+
 const Page = (): JSX.Element => {
-  return <>BD BODY</>
+  return (
+    <>
+      <h1>¡Es momento de brillar! 🌟</h1>
+      <h4>
+        Sube tu nueva imagen y personalízala con detalles únicos. Completa los <br /> campos a
+        continuación para darle un toque especial a tu foto y <br /> compartirla con el mundo.
+      </h4>
+      <TransformForm />
+    </>
+  )
 }
 
 export default Page

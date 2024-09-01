@@ -1,0 +1,28 @@
+@use '@/sass/config/vars' as v;
+@use '@/sass/utils/defs' as d;
+@use '@/sass/utils/media' as m;
+
+@include m.extraLargeScreen() {
+  .IPreviewImage {
+    flex-direction: row-reverse;
+    width: max-content;
+    &-image {
+      width: 200px;
+      height: 200px;
+      max-width: 200px;
+      min-width: 200px;
+      min-height: 200px;
+      max-height: 200px;
+    }
+    &-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+}
+
+@include m.smallScreen() {
+  .IPreviewImage {
+    flex-direction: column;
+  }
+}

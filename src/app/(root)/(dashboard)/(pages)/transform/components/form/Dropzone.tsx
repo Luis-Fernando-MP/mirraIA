@@ -9,6 +9,7 @@ import Dropzone from 'react-dropzone'
 import PreviewImage from '../PreviewImage/'
 import './style.scss'
 import useDropzone from './useDropzone'
+import './userMobile.scss'
 
 interface IDropzone {
   children?: Readonly<ReactNode[]> | null | Readonly<ReactNode>

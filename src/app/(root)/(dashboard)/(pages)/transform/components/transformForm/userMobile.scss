@@ -28,7 +28,8 @@
       }
       &.dropzone {
         width: 80%;
-        height: 300px;
+        min-height: 300px;
+        height: max-content;
       }
     }
   }

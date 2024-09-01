@@ -15,7 +15,6 @@
       text-align: center;
     }
   }
-
   @keyframes onDrag {
     from {
       scale: 1;
@@ -24,7 +23,6 @@
       scale: 0.99;
     }
   }
-
   &-tag {
     background-color: v.$bg1;
     border-radius: 3px;

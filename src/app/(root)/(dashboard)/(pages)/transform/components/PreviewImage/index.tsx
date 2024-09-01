@@ -3,6 +3,7 @@ import { acl } from '@/shared/lib/activeClass'
 import type { JSX, ReactNode } from 'react'
 
 import './style.scss'
+import './userMobile.scss'
 
 interface IPreviewImage {
   children?: Readonly<ReactNode[]> | null | Readonly<ReactNode>

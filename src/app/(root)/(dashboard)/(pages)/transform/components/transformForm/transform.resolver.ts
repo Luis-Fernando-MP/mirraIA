@@ -1,6 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 
+const notFileMessage = '🤖 Sube un archivo en formato (PNG, JPG, JPEG o WEBP)'
+const fileSchema = z.instanceof(File, { message: notFileMessage }).refine(
+  file => {
+    const validTypes = ['image/png', 'image/jpeg', 'image/webp']
+    return validTypes.includes(file.type)
+  },
+  { message: notFileMessage }
+)
+
 const transformValidator = z.object(
   {
     title: z
@@ -46,7 +55,8 @@ const transformValidator = z.object(
       })
       .max(200, {
         message: '📏 Máximo 200 caracteres'
-      })
+      }),
+    image: fileSchema // <-- Type file
   },
   {
     description: '🔍 Filtros para el formulario de transformación de imágenes'

@@ -1,0 +1,48 @@
+@use '@/sass/config/vars' as v;
+@use '@/sass/utils/defs' as d;
+
+.IPreviewImage {
+  width: 100%;
+  @include d.flex($ali: center);
+  justify-content: center;
+  &-image {
+    border-radius: v.$radius;
+    box-shadow: v.$sha1 inset;
+    height: 320px;
+    padding: v.$padding;
+    width: 550px;
+    position: relative;
+    &__progress {
+      height: 100%;
+      background-color: v.$tn3;
+    }
+    img {
+      border-radius: v.$radius;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.9;
+      filter: brightness(0.9);
+      object-position: 20% 20%;
+      width: 100%;
+    }
+  }
+  &-actions {
+    width: 100%;
+    @include d.flex($ali: center, $dir: row);
+    justify-content: center;
+    button {
+      padding: v.$padding * 0.5 v.$padding;
+      box-shadow: v.$sha1;
+      @include v.hoverS(0.95);
+      border-radius: 5px;
+    }
+    button:first-child {
+      background-color: v.$tn1;
+      color: v.$bg1;
+    }
+    button:last-child {
+      background-color: v.$bg1;
+      color: v.$fn1;
+    }
+  }
+}

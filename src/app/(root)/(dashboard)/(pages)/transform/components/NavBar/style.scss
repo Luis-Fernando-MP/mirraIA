@@ -10,9 +10,10 @@
     border-radius: v.$radius;
     height: 100%;
     min-width: 300px;
+    max-width: 300px;
+    width: 300px;
     overflow: auto;
     padding: v.$padding;
-    width: 300px;
     &-link {
       width: 270px;
       border-radius: v.$radius / 2;

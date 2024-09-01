@@ -1,17 +1,32 @@
 @use '@/sass/config/vars' as v;
 @use '@/sass/utils/defs' as d;
+@use '@/sass/utils/text' as t;
 
 .dsTransform {
   width: 100%;
   height: 100%;
-  @include d.flex($dir: row, $ali: center);
+  @include d.flex($dir: row);
+  min-height: auto;
   &-article {
     &.requirements {
       padding: v.$padding 0;
-      width: 350px;
-      min-height: 350px;
-      max-width: 350px;
+      width: 300px;
+      min-height: 300px;
+      max-width: 300px;
       @include d.flex($gap: v.$padding * 0.5);
+    }
+    &.dropzone {
+      height: auto;
+      width: calc(100% - 300px);
+      padding: v.$padding;
+      @include d.flex($ali: center);
+      justify-content: center;
+      border-radius: v.$radius;
+      &.error {
+        padding: 5px;
+        background-color: #ffe4e6;
+        border: 2px solid #e07a84;
+      }
     }
   }
   &-control {
@@ -51,6 +66,7 @@
       @include d.flex;
       justify-content: center;
       font-weight: 700;
+      @include t.pointers;
     }
     &.color {
       flex-direction: column;

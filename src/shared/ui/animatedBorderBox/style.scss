@@ -1,0 +1,70 @@
+@use '@/sass/config/vars' as v;
+@use '@/sass/utils/defs' as d;
+
+.animatedBorderBox {
+  @include d.flex($ali: center, $gap: 0);
+  border-radius: 10px;
+  height: 100%;
+  justify-content: center;
+  overflow: hidden;
+  padding: 3px;
+  position: relative;
+  width: 100%;
+  border: 2px dotted v.$bg3;
+  &:has(.animatedBorderBox-content.active) {
+    &::before {
+      opacity: 1;
+      animation-play-state: running;
+    }
+    &::after {
+      opacity: 1;
+      animation-play-state: running;
+    }
+  }
+  &-content {
+    @include d.flex($ali: center);
+    border-radius: v.$radius;
+    height: 100%;
+    padding: v.$padding;
+    width: 100%;
+    z-index: 1;
+  }
+  &::before,
+  &::after {
+    content: '';
+    opacity: 0;
+    position: absolute;
+    display: block;
+    width: 500px;
+    height: 100%;
+    transition: opacity 300ms;
+    animation-play-state: paused;
+  }
+  &::before {
+    transform: rotate(0deg) translateY(50%);
+    background: linear-gradient(90deg, v.$tn1 0%, v.$bg3 20%, transparent);
+    animation: rotation_left 5000ms infinite linear;
+  }
+  &::after {
+    transform: rotate(0deg) translateY(-50%);
+    background: linear-gradient(90deg, transparent, v.$bg3 80%, v.$tn1 100%);
+    animation: rotation_right 5000ms infinite linear;
+  }
+}
+
+@keyframes rotation_left {
+  0% {
+    transform: rotate(0deg) translateY(50%);
+  }
+  100% {
+    transform: rotate(360deg) translateY(50%);
+  }
+}
+@keyframes rotation_right {
+  0% {
+    transform: rotate(0deg) translateY(-50%);
+  }
+  100% {
+    transform: rotate(360deg) translateY(-50%);
+  }
+}

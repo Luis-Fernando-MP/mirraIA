@@ -1,0 +1,69 @@
+@use '@/sass/config/vars' as v;
+@use '@/sass/utils/defs' as d;
+@use '@/sass/utils/media' as m;
+
+@include m.extraLargeScreen() {
+  .dsRSContainer {
+    align-items: center;
+  }
+  .restore-description {
+    text-align: center;
+  }
+  .dsTransform {
+    flex-direction: column-reverse;
+    align-items: center;
+    height: auto;
+    .bigButton {
+      max-width: 300px;
+    }
+    &-article {
+      &.requirements {
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        max-width: initial;
+        min-width: initial;
+        width: 50%;
+      }
+      &.dropzone {
+        width: 80%;
+        height: 300px;
+      }
+    }
+  }
+}
+
+@include m.largeScreen() {
+  .dsTransform {
+    &-article {
+      &.requirements {
+        justify-content: center;
+        width: 70%;
+      }
+      &.dropzone {
+        width: 90%;
+      }
+    }
+  }
+}
+
+@include m.smallScreen() {
+  .dsTransform {
+    &-article {
+      &.requirements {
+        width: 100%;
+      }
+      &.dropzone {
+        width: 100%;
+      }
+    }
+    &-control,
+    &-input.link,
+    .bigButton {
+      width: 90%;
+      max-width: 90%;
+      min-width: 90%;
+    }
+  }
+}

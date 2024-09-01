@@ -12,6 +12,7 @@ import BigButton from '../BigButton'
 import CustomDropzone from '../form/Dropzone'
 import './style.scss'
 import { ITransformResolver, transformResolver } from './transform.resolver'
+import './userMobile.scss'
 
 const inputValues = {
   title: {
@@ -43,7 +44,6 @@ const TransformForm = (): JSX.Element => {
     })
   const { errors: err } = formState
   const color = watch('color')
-
   useEffect(() => {
     const values = color.split(',')
     if (!Array.isArray(values)) return
@@ -111,7 +111,17 @@ const TransformForm = (): JSX.Element => {
             </select>
           </div>
         </div>
-
+        <div className='dsTransform-input link'>
+          <h4 className='dsTransform-input__tag'>Link temporal ⏳</h4>
+          <Link
+            href={watch('publicId') ?? '/'}
+            className='dsTransform-input__link'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            {watch('publicId')}
+          </Link>
+        </div>
         <div className={`dsTransform-control ${acl(!!err.color, 'error')}`}>
           <p className='dsTransform-control__error'>{err.color?.message}</p>
           <div className='dsTransform-input color'>
@@ -128,18 +138,6 @@ const TransformForm = (): JSX.Element => {
               })}
             </aside>
           </div>
-        </div>
-
-        <div className='dsTransform-input'>
-          <h4 className='dsTransform-input__tag'>Link temporal ⏳</h4>
-          <Link
-            href={watch('publicId') ?? '/'}
-            className='dsTransform-input__link'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            {watch('publicId')}
-          </Link>
         </div>
         <BigButton />
       </article>

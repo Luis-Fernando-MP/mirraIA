@@ -5,3 +5,10 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+@mixin pointers() {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

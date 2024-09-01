@@ -1,8 +1,14 @@
 'use client'
 
-import Image from 'next/image'
-import { type JSX, type ReactNode, useState } from 'react'
+import { acl } from '@/shared/lib/activeClass'
+import { MAX_FILE_SIZE } from '@/shared/lib/constants'
+import AnimatedBorderBox from '@/shared/ui/animatedBorderBox'
+import { type JSX, type ReactNode } from 'react'
 import Dropzone from 'react-dropzone'
+
+import PreviewImage from '../PreviewImage/'
+import './style.scss'
+import useDropzone from './useDropzone'
 
 interface IDropzone {
   children?: Readonly<ReactNode[]> | null | Readonly<ReactNode>
@@ -10,58 +16,67 @@ interface IDropzone {
 }
 
 const CustomDropzone = ({ setPublicIdField }: IDropzone): JSX.Element => {
-  const [preview, setPreview] = useState<string | null>(null)
-
-  const handleDrop = (file: File[] | null) => {
-    if (file && file?.length > 0) {
-      const image = file[0]
-      const previewUrl = URL.createObjectURL(image)
-      setPreview(previewUrl)
-      setPublicIdField(image, previewUrl)
-    }
-  }
+  const {
+    loading,
+    preview,
+    progress,
+    handleRejectFiles,
+    handleDrop,
+    handleError,
+    handleClear,
+    getDropzoneMessage
+  } = useDropzone({ set: setPublicIdField })
 
   return (
     <Dropzone
       onDrop={handleDrop}
       multiple={false}
-      accept={{ 'image/png': [], 'image/jpeg': [], 'image/webp': [] }}
+      accept={{ 'image/png': [], 'image/jpeg': [], 'image/jpg': [], 'image/webp': [] }}
+      onDropRejected={handleRejectFiles}
+      onError={handleError}
+      noClick
+      maxSize={MAX_FILE_SIZE}
     >
-      {({ getRootProps, getInputProps, open, isDragActive }) => (
-        <section className='m-4 h-auto min-h-80 bg-blue-200 p-4' {...getRootProps()}>
-          {!preview && (
-            <section>
-              <div className='flex h-full flex-col items-center justify-center'>
-                <input {...getInputProps()} />
-                <button
-                  type='button'
-                  onClick={open}
-                  className='mb-2 rounded bg-blue-500 p-2 text-white'
-                >
-                  Open
-                </button>
-                {isDragActive ? (
-                  <p>Drop the files here ...</p>
-                ) : (
-                  <p>Drag 'n' drop some files here, or click to select files</p>
-                )}
-              </div>
-            </section>
-          )}
-          {preview && (
-            <div className='mt-4'>
-              <p>Preview:</p>
-              <Image
-                src={preview}
-                width={150}
-                height={150}
-                alt='Preview'
-                className='mt-2 h-auto max-w-full object-contain'
-              />
-            </div>
-          )}
-        </section>
-      )}
+      {({ getRootProps, getInputProps, open, isDragActive }) => {
+        return (
+          <div {...getRootProps()} className='customDropzone'>
+            <input {...getInputProps()} />
+            <AnimatedBorderBox className={`${acl(isDragActive)} customDropzone-content`}>
+              <h3 className='customDropzone-tag'>{getDropzoneMessage(isDragActive)}</h3>
+              <h3>{!isDragActive && 'Arrastra y '}Suelta tu Imagen Aquí 📥</h3>
+              <p>
+                Simplemente arrastra tu imagen a esta área para cargarla. Puedes soltarla aquí
+                <br /> para comenzar el proceso de transformación.
+              </p>
+              {!preview && !loading && (
+                <>
+                  {!isDragActive && (
+                    <button
+                      className='customDropzone-choseFile'
+                      type='button'
+                      onClick={open}
+                      onDragOver={e => e.stopPropagation()}
+                    >
+                      Prefiero seleccionar un archivo 📁
+                    </button>
+                  )}
+                  {isDragActive && (
+                    <h4 className='customDropzone-dropHere'>👋 Hey por aca, suéltalo vamos!! 🏁</h4>
+                  )}
+                </>
+              )}
+              {loading && <PreviewImage isLoading={loading} progress={progress} />}
+              {preview && !loading && (
+                <PreviewImage
+                  imagePreview={preview}
+                  closePreview={handleClear}
+                  openDirectory={open}
+                />
+              )}
+            </AnimatedBorderBox>
+          </div>
+        )
+      }}
     </Dropzone>
   )
 }

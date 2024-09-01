@@ -2,11 +2,13 @@
 
 import userStore from '@/app/(root)/(dashboard)/user.state'
 import { acl } from '@/shared/lib/activeClass'
+import { PASTEL_COLORS } from '@/shared/lib/constants'
+import { toast } from '@pheralb/toast'
 import Link from 'next/link'
 import { type JSX, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
-import BigButton from '../BigButton/idex'
+import BigButton from '../BigButton'
 import CustomDropzone from '../form/Dropzone'
 import './style.scss'
 import { ITransformResolver, transformResolver } from './transform.resolver'
@@ -26,34 +28,22 @@ const inputValues = {
   }
 }
 
-const pastelColors = {
-  coral: ['#ff9999', '#ffcccc'],
-  green: ['#b3e6b3', '#99cc99'],
-  lavender: ['#e0b3e6', '#d6a1e6'],
-  lilac: ['#e0c6ff', '#d1a6e6'],
-  white: ['#f3f2ff', '#d0d0ee'],
-  mint: ['#c2f7e1', '#a1e6d4'],
-  peach: ['#ffe5b3', '#ffcc99'],
-  pink: ['#ffb3d9', '#ff77a1'],
-  sky: ['#b3e0ff', '#99ccff']
-}
-
 const TransformForm = (): JSX.Element => {
   const user = userStore()
-  const { register, handleSubmit, formState, reset, setValue, watch } = useForm<ITransformResolver>(
-    {
+  const { register, handleSubmit, formState, setValue, watch, trigger } =
+    useForm<ITransformResolver>({
       mode: 'onChange',
       resolver: transformResolver,
       defaultValues: {
         tags: 'nuevo,restauración',
         title: 'Titulo de ejemplo',
         visibility: 'public',
-        color: pastelColors.white.join(),
-        publicId: 'hola-mundo'
+        color: PASTEL_COLORS.white.join()
       }
-    }
-  )
+    })
+  const { errors: err } = formState
   const color = watch('color')
+
   useEffect(() => {
     const values = color.split(',')
     if (!Array.isArray(values)) return
@@ -78,14 +68,15 @@ const TransformForm = (): JSX.Element => {
     setValue('author', author)
   }, [setValue, user])
 
-  const { errors: err } = formState
-
   const onError = (): void => {
     console.error('Error: ', err)
   }
 
   const onSubmit = async (data: ITransformResolver) => {
     console.log('submit ', data)
+    toast.loading({
+      text: 'Cargando'
+    })
   }
 
   return (
@@ -126,7 +117,7 @@ const TransformForm = (): JSX.Element => {
           <div className='dsTransform-input color'>
             <h4 className='dsTransform-input__tag'>Color 🎨</h4>
             <aside className='dsTransform-input__colors'>
-              {Object.values(pastelColors).map(color => {
+              {Object.values(PASTEL_COLORS).map(color => {
                 const [from, to] = color
                 const bg = `linear-gradient(135deg, ${from}, ${to})`
                 return (
@@ -141,17 +132,24 @@ const TransformForm = (): JSX.Element => {
 
         <div className='dsTransform-input'>
           <h4 className='dsTransform-input__tag'>Link temporal ⏳</h4>
-          <Link href='/' className='dsTransform-input__link' target='_blank'>
-            blob:127.0.0.1:30
+          <Link
+            href={watch('publicId') ?? '/'}
+            className='dsTransform-input__link'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            {watch('publicId')}
           </Link>
         </div>
         <BigButton />
       </article>
-      <article className='dsTransform-article'>
+      <article className={`dsTransform-article dropzone ${acl(!!err.image, 'error')}`}>
+        {err.image && <p className='dsTransform-control__error'>{err.image?.message}</p>}
         <CustomDropzone
           setPublicIdField={(image, temporalLink) => {
-            // setValue('image', image)
-            // setValue('publicId', temporalLink)
+            setValue('image', image)
+            setValue('publicId', temporalLink)
+            trigger('image')
             console.log(image, temporalLink)
           }}
         />

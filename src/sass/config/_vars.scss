@@ -1,6 +1,6 @@
 :root {
   --bg-primary: #f3f2ff;
-  --bg-secondary: #ebebfff5;
+  --bg-secondary: #ebebff;
   --bg-tertiary: #d0d0eef5;
 
   --fnt-primary: #000000;
@@ -8,7 +8,7 @@
 
   --tn-primary: #956ff9;
   --tn-secondary: #f9489d;
-  --tn-tertiary: #7649a2;
+  --tn-tertiary: #7549a22c;
 
   --xl-font-size: 5em;
   --h1-font-size: 2em;
@@ -75,7 +75,7 @@ $sha1: 6px 5px 20px -5px $bg3;
     border: 1px solid $bg3;
   }
 }
-@mixin hoverS($s: 0.2s, $scale: 0.99) {
+@mixin hoverS($scale: 0.99, $s: 0.2s) {
   transition: all $s ease-in;
   scale: 1;
   &:hover {

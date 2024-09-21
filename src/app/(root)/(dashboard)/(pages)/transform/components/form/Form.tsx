@@ -3,10 +3,10 @@
 import userStore from '@/app/(root)/(dashboard)/user.state'
 import { CLD_PRESET } from '@/shared/lib/constants'
 import { generateImageName } from '@/shared/lib/utils'
-import { toast } from '@pheralb/toast'
 import axios from 'axios'
 import { type JSX, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-hot-toast'
 import 'two-up-element'
 
 import CustomDropzone from './Dropzone'
@@ -35,9 +35,8 @@ const Form = (): JSX.Element | null => {
 
   const onSubmit = async (data: IRestoreValidator) => {
     console.log('Datos del formulario:', data)
-    toast.loading({
-      text: 'Subiendo imagen',
-      id: 2001
+    toast.loading('Subiendo imagen', {
+      id: 'form'
     })
     await uploadToCloudinary(data.image)
   }

@@ -1,7 +1,7 @@
 import { MontserratFont, PlayFairFont, RobotoFont } from '@/shared/lib/fonts'
-import { Toaster } from '@pheralb/toast'
 import type { Metadata } from 'next'
 import type { JSX, ReactNode } from 'react'
+import { Toaster } from 'react-hot-toast'
 
 import './globals.css'
 import './index.scss'
@@ -29,7 +29,7 @@ const RootLayout = async ({ children }: IRootLayout): Promise<JSX.Element> => {
         className={`${MontserratFont.variable} ${RobotoFont.variable} ${PlayFairFont.variable}`}
       >
         <Providers>{children}</Providers>
-        <Toaster position='top-center' theme='light' maxToasts={10} />
+        <Toaster position='top-center' reverseOrder />
       </body>
     </html>
   )

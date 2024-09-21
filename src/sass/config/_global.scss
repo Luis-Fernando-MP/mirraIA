@@ -202,3 +202,10 @@ svg {
 .cl-rootBox button:focus {
   box-shadow: none;
 }
+
+.disable {
+  user-select: none;
+  pointer-events: none;
+  opacity: 0.9;
+  background-color: $fn2 !important;
+}

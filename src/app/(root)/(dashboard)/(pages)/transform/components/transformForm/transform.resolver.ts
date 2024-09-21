@@ -27,16 +27,6 @@ const transformValidator = z.object(
       message:
         '🏷️ Deben de estar separadas por comas sin espacios adicionales (p.ejm, "etiqueta1,etiqueta2")'
     }),
-    color: z
-      .string({
-        message: '🎨 Elije un color valido'
-      })
-      .min(15, {
-        message: '⚠️ La cantidad de caracteres es invalido'
-      })
-      .max(15, {
-        message: '📏 La cantidad de caracteres es invalido'
-      }),
     author: z
       .string()
       .regex(/^[a-zA-Z0-9\sñÑáéíóúÁÉÍÓÚüÜ]*$/, {

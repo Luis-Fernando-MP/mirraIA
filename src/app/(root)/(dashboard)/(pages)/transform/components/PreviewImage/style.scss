@@ -8,7 +8,8 @@
   &-image {
     border-radius: v.$radius;
     box-shadow: v.$sha1 inset;
-    height: 320px;
+    min-height: 320px;
+    height: auto;
     padding: v.$padding;
     width: 550px;
     position: relative;

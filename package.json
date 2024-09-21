@@ -15,7 +15,6 @@
   "dependencies": {
     "@clerk/nextjs": "5.3.2",
     "@hookform/resolvers": "3.9.0",
-    "@pheralb/toast": "0.2.3",
     "axios": "1.7.5",
     "cloudinary": "2.4.0",
     "dayjs": "1.11.13",
@@ -28,6 +27,7 @@
     "react-dom": "18.3.1",
     "react-dropzone": "14.2.3",
     "react-hook-form": "7.53.0",
+    "react-hot-toast": "2.4.1",
     "svix": "1.30.0",
     "usehooks-ts": "3.1.0",
     "zod": "3.23.8",

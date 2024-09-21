@@ -4,7 +4,7 @@ import cloudinary from '@/shared/cloudinaryConfig'
 import { NextResponse } from 'next/server'
 
 import { ITransformFormData } from './responseCld.type'
-import { uploadCloudinaryStream } from './utils/cld'
+import { uploadCloudinaryBase64 } from './utils/cld'
 import { imageQuality } from './utils/qualitiesTransform'
 
 export async function POST(req: Request) {
@@ -14,14 +14,12 @@ export async function POST(req: Request) {
 
     const user = await User.findById({ _id: data.author })
     if (!user) throw new Error('User not found')
-    console.log('USER ---- ', user)
 
     const arrayBuffer = await data.image.arrayBuffer()
-    const saveImage = await uploadCloudinaryStream({ author: data.author, arrayBuffer })
+    const saveImage = await uploadCloudinaryBase64({ author: data.author, arrayBuffer })
     const temporalUrlTransformFile = cloudinary.url(saveImage.public_id, {
       transformation: [...imageQuality]
     })
-    console.log('temporalUrlTransformFile ---- ', temporalUrlTransformFile)
 
     const { title, transformationType, visibility, authorEditor, tags } = data
     const imageModel = await Image.create({

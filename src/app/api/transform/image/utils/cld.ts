@@ -35,8 +35,6 @@ export const uploadCloudinaryStream = async ({
 }: IUploadCloudinaryStream): Promise<CldImageResponse> => {
   const buffer = Buffer.from(arrayBuffer)
   const tmpID = `${CLD_FOLDER}/${author}/transformed-${randomUUID()}`
-  console.log('TMPID: ', tmpID)
-
   return await new Promise((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(
       {
@@ -44,14 +42,34 @@ export const uploadCloudinaryStream = async ({
         public_id: tmpID
       },
       (error, result: any) => {
-        console.log('STREAMMMMMMMMMMMMMM ', error, 'res', result)
         if (error) return reject(new Error('Error uploading image: ' + error.message))
         resolve(result)
       }
     )
-
     const passthrough = new Stream.PassThrough()
     passthrough.end(buffer)
     passthrough.pipe(uploadStream)
   })
+}
+
+export const uploadCloudinaryBase64 = async ({
+  author,
+  arrayBuffer
+}: IUploadCloudinaryStream): Promise<CldImageResponse> => {
+  try {
+    const buffer = Buffer.from(arrayBuffer)
+    const tmpID = `${CLD_FOLDER}/${author}/transformed-${randomUUID()}`
+
+    const uploadResponse = await cloudinary.uploader.upload(
+      `data:image/jpeg;base64,${buffer.toString('base64')}`,
+      {
+        colors: true,
+        public_id: tmpID
+      }
+    )
+    if (!uploadResponse) throw new Error('Error saving image')
+    return uploadResponse as CldImageResponse
+  } catch (error: any) {
+    throw new Error(error)
+  }
 }

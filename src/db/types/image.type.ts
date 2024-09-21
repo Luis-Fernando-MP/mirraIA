@@ -11,6 +11,7 @@ interface IImage extends Document {
   height?: number
   config?: object
   transformationUrl?: string
+  temporalUrlTransformFile?: string
   aspectRatio?: string
   color?: string
   prompt?: string

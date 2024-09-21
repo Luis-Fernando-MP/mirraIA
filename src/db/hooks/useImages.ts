@@ -17,8 +17,8 @@ export function useImages(filters: IImagesByFilter) {
       const [, filters] = queryKey
       return await getImagesByQuery(filters as IImagesByFilter)
     },
-    staleTime: 500,
+    staleTime: 100,
     retry: 5,
-    initialDataUpdatedAt: 500
+    initialDataUpdatedAt: 100
   })
 }

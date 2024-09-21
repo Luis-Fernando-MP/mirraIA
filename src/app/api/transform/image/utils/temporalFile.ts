@@ -1,4 +1,4 @@
-import { randomUUID } from 'crypto'
+// import { randomUUID } from 'crypto'
 import fs from 'fs'
 import 'fs/promises'
 import path from 'path'
@@ -9,8 +9,9 @@ const temporalDir = path.join(dir, 'src/app/api/transform/image', 'temp')
 export async function createTempFile(arrayBuffer: ArrayBuffer) {
   const existTempFolder = fs.existsSync(temporalDir)
 
-  const tempFilePath = path.join(temporalDir, `${randomUUID()}.jpg`)
   if (!existTempFolder) fs.mkdirSync(temporalDir)
+  // const tempFilePath = path.join(temporalDir, `${randomUUID()}.jpg`)
+  const tempFilePath = path.join(temporalDir, `TEMPORAL.jpg`)
 
   const buffer = Buffer.from(arrayBuffer)
   fs.writeFileSync(tempFilePath, buffer)
@@ -22,6 +23,6 @@ export async function unlinkTempFile(path: string) {
   if (!existFIle) return
   const timer = setTimeout(() => {
     clearTimeout(timer)
-    fs.unlinkSync(path)
+    // fs.unlinkSync(path)
   }, 10000)
 }

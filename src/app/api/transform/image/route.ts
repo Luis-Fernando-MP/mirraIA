@@ -1,6 +1,5 @@
 import Image from '@/db/models/Image'
 import User from '@/db/models/User'
-import 'fs/promises'
 import { NextResponse } from 'next/server'
 
 import { ITransformFormData } from './responseCld.type'
@@ -10,6 +9,9 @@ import { createTempFile, unlinkTempFile } from './utils/temporalFile'
 export async function POST(req: Request) {
   let tempFilePath = ''
   try {
+    // const file = await fs.writeFile(process.cwd() + '/app/data.json', 'Hola', { encoding: 'utf8' })
+    // console.log('hola --> ', file)
+
     const reqForm = await req.formData()
     const data: ITransformFormData = Object.fromEntries(reqForm.entries()) as any
 

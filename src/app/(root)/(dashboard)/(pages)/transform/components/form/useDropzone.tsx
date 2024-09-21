@@ -54,10 +54,7 @@ const useDropzone = ({ set }: TUseDropzoneProps) => {
   const handleError = (e: Error) => {
     setError(e.message)
     setLoading(false)
-    toast.error({
-      text: '🚫 ¡Error al subir tu archivo!',
-      description: '🔍 Verifica su tamaño y formato.'
-    })
+    toast.error('🔍 Verifica su tamaño y formato.')
   }
 
   const handleClear = () => {

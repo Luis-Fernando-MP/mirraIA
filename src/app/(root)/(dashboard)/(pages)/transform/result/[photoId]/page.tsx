@@ -1,8 +1,7 @@
-import type { JSX, ReactNode } from 'react'
+import type { JSX } from 'react'
 
 interface IResult {
   params: { photoId: string }
-  children?: Readonly<ReactNode[]> | null
 }
 
 const Result = ({ params }: IResult): JSX.Element => {

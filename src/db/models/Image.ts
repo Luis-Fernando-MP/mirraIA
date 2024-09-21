@@ -7,6 +7,7 @@ const ImageSchema = new Schema<IImage>({
   transformationType: { type: String, required: true },
   visibility: { type: String, enum: ['public', 'private'], default: 'public' },
   prompt: { type: String },
+  temporalUrlTransformFile: { type: String, default: '' },
   colors: { type: [String], default: [] },
   tags: { type: [String], default: [] },
   authorEditor: { type: String, default: '' },

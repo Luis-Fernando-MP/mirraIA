@@ -1,21 +1,19 @@
 import cloudinary from '@/shared/cloudinaryConfig'
 import { CLD_FOLDER } from '@/shared/lib/constants'
-import axios from 'axios'
 import { UploadApiOptions } from 'cloudinary'
 import { randomUUID } from 'crypto'
+import { Stream } from 'stream'
 
 import { CldImageResponse } from '../responseCld.type'
-import { imageQuality } from './qualitiesTransform'
-import { createTempFile, unlinkTempFile } from './temporalFile'
 
 interface ISaveImage {
-  file: string
+  url: string
   author: string
   options?: UploadApiOptions
 }
-export const cldSaveImage = async ({ file, author, options }: ISaveImage) => {
+export const cldSaveImage = async ({ url, author, options }: ISaveImage) => {
   try {
-    const saveImage = await cloudinary.uploader.upload(file, {
+    const saveImage = await cloudinary.uploader.upload(url, {
       colors: true,
       public_id: `${CLD_FOLDER}/${author}/${randomUUID()}`,
       ...options
@@ -27,46 +25,30 @@ export const cldSaveImage = async ({ file, author, options }: ISaveImage) => {
   }
 }
 
-interface ITransformImage extends Omit<ISaveImage, 'file'> {
-  publicId: string
+interface IUploadCloudinaryStream {
   author: string
-  options?: UploadApiOptions
+  arrayBuffer: ArrayBuffer
 }
-export const cldSaveTransformImage = async ({
-  publicId,
+export const uploadCloudinaryStream = async ({
   author,
-  options = {}
-}: ITransformImage) => {
+  arrayBuffer
+}: IUploadCloudinaryStream): Promise<CldImageResponse> => {
+  const buffer = Buffer.from(arrayBuffer)
   const tmpID = `${CLD_FOLDER}/${author}/transformed-${randomUUID()}`
-  let tempFilePath = ''
-  try {
-    const url = cloudinary.url(publicId, {
-      transformation: [...imageQuality],
-      ...options
-    })
-
-    // Descarga la imagen generado de cld
-    // Se uso cloudinary.uploader.upload directamente por el tiempo de demora
-    const response = await axios.get(url, { responseType: 'arraybuffer' })
-    tempFilePath = await createTempFile(response.data)
-
-    const saveTransformedImage = cloudinary.uploader.upload(tempFilePath, {
-      public_id: tmpID
-    })
-
-    // Carga la imagen en segundo plano
-    Promise.allSettled([saveTransformedImage]).then(results => {
-      const [result] = results
-      if (result.status === 'rejected') {
-        return console.error('Error saving transform image:', result.reason)
+  return await new Promise((resolve, reject) => {
+    const uploadStream = cloudinary.uploader.upload_stream(
+      {
+        colors: true,
+        public_id: tmpID
+      },
+      (error, result: any) => {
+        if (error) return reject(new Error('Error uploading image: ' + error.message))
+        resolve(result)
       }
-    })
+    )
 
-    return { publicId: tmpID }
-  } catch (error: any) {
-    console.log(error.message)
-    throw new Error(error)
-  } finally {
-    unlinkTempFile(tempFilePath)
-  }
+    const passthrough = new Stream.PassThrough()
+    passthrough.end(buffer)
+    passthrough.pipe(uploadStream)
+  })
 }

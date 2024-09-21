@@ -14,12 +14,14 @@ export async function POST(req: Request) {
 
     const user = await User.findById({ _id: data.author })
     if (!user) throw new Error('User not found')
+    console.log('USER ---- ', user)
 
     const arrayBuffer = await data.image.arrayBuffer()
     const saveImage = await uploadCloudinaryStream({ author: data.author, arrayBuffer })
     const temporalUrlTransformFile = cloudinary.url(saveImage.public_id, {
       transformation: [...imageQuality]
     })
+    console.log('temporalUrlTransformFile ---- ', temporalUrlTransformFile)
 
     const { title, transformationType, visibility, authorEditor, tags } = data
     const imageModel = await Image.create({

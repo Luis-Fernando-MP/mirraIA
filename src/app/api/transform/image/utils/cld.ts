@@ -35,6 +35,8 @@ export const uploadCloudinaryStream = async ({
 }: IUploadCloudinaryStream): Promise<CldImageResponse> => {
   const buffer = Buffer.from(arrayBuffer)
   const tmpID = `${CLD_FOLDER}/${author}/transformed-${randomUUID()}`
+  console.log('TMPID: ', tmpID)
+
   return await new Promise((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(
       {
@@ -42,6 +44,7 @@ export const uploadCloudinaryStream = async ({
         public_id: tmpID
       },
       (error, result: any) => {
+        console.log('STREAMMMMMMMMMMMMMM ', error, 'res', result)
         if (error) return reject(new Error('Error uploading image: ' + error.message))
         resolve(result)
       }

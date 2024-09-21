@@ -121,7 +121,7 @@ export async function getResourcesCloudinary(limit: number = 9) {
   return { resources, resourceIds }
 }
 
-interface IImagesByFilter {
+export interface IImagesByFilter {
   query: FilterQuery<IImage>
   limit?: number
   page?: number

@@ -1,7 +1,7 @@
 import { MAX_FILE_SIZE } from '@/shared/lib/constants'
-import { toast } from '@pheralb/toast'
 import { useState } from 'react'
 import { FileRejection } from 'react-dropzone'
+import { toast } from 'react-hot-toast'
 
 interface TUseDropzoneProps {
   set: (image: File, previewUrl: string) => void
@@ -43,9 +43,8 @@ const useDropzone = ({ set }: TUseDropzoneProps) => {
       setError('⚠️ ¡Verifica el formato de tu archivo!')
       files.forEach(({ file }) => {
         if (!/\.(png|jpe?g|webp)$/i.test(file.name)) {
-          toast.error({
-            text: '🚫 ¡Extensión incorrecta!',
-            description: `⚠️ ${file.name} no usa un formato válido (PNG, JPG, JPEG o WEBP).`
+          toast.error('🚫 ¡Extensión incorrecta!', {
+            id: 'rejectDropZone'
           })
         }
       })
@@ -55,10 +54,7 @@ const useDropzone = ({ set }: TUseDropzoneProps) => {
   const handleError = (e: Error) => {
     setError(e.message)
     setLoading(false)
-    toast.error({
-      text: '🚫 ¡Error al subir tu archivo!',
-      description: '🔍 Verifica su tamaño y formato.'
-    })
+    toast.error('🔍 Verifica su tamaño y formato.')
   }
 
   const handleClear = () => {

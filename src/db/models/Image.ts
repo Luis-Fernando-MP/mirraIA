@@ -6,21 +6,20 @@ const ImageSchema = new Schema<IImage>({
   title: { type: String, required: true },
   transformationType: { type: String, required: true },
   visibility: { type: String, enum: ['public', 'private'], default: 'public' },
+  prompt: { type: String },
+  colors: { type: [String], default: [] },
+  tags: { type: [String], default: [] },
+  authorEditor: { type: String, default: '' },
+  author: { type: Schema.Types.ObjectId, ref: 'User' },
 
   publicId: { type: String, required: true },
   transformationUrl: { type: String },
   views: { type: Number, default: 0 },
 
-  width: { type: Number },
-  height: { type: Number },
-  aspectRatio: { type: String },
+  bytes: { type: Number, default: 0 },
+  width: { type: Number, default: 0 },
+  height: { type: Number, default: 0 },
 
-  prompt: { type: String },
-  color: { type: String },
-  config: { type: Schema.Types.Mixed },
-
-  tags: { type: [String], default: [] },
-  author: { type: Schema.Types.ObjectId, ref: 'User' },
   createdAt: { type: Number, default: Date.now },
   updatedAt: { type: Number, default: Date.now }
 })

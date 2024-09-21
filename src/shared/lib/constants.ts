@@ -8,6 +8,7 @@ export const CLD_SECRET = process.env.CLOUDINARY_API_SECRET
 export const CLD_FOLDER = process.env.NEXT_PUBLIC_CLOUDINARY_FOLDER_NAME!
 
 export const CLD_URL = `http://res.cloudinary.com/${CLD_NAME!}/image/upload/v1724827405`
+export const CLD_POST_URL = `http://api.cloudinary.com/v1_1/${CLD_NAME!}/image/upload`
 
 export const MAX_FILE_SIZE = 10 * 1024 * 1024
 
@@ -21,4 +22,10 @@ export const PASTEL_COLORS = {
   peach: ['#ffe5b3', '#ffcc99'],
   pink: ['#ffb3d9', '#ff77a1'],
   sky: ['#b3e0ff', '#99ccff']
+}
+
+export enum ESTATE {
+  LOADING,
+  SLATE,
+  ERROR
 }

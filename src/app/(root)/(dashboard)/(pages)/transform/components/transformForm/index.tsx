@@ -1,17 +1,13 @@
 'use client'
 
-import userStore from '@/app/(root)/(dashboard)/user.state'
 import { acl } from '@/shared/lib/activeClass'
-import { PASTEL_COLORS } from '@/shared/lib/constants'
-import { toast } from '@pheralb/toast'
 import Link from 'next/link'
-import { type JSX, useEffect } from 'react'
-import { useForm } from 'react-hook-form'
+import { type JSX } from 'react'
 
 import BigButton from '../BigButton'
 import CustomDropzone from '../form/Dropzone'
 import './style.scss'
-import { ITransformResolver, transformResolver } from './transform.resolver'
+import useTransformForm from './useTransformForm'
 import './userMobile.scss'
 
 const inputValues = {
@@ -30,54 +26,8 @@ const inputValues = {
 }
 
 const TransformForm = (): JSX.Element => {
-  const user = userStore()
-  const { register, handleSubmit, formState, setValue, watch, trigger } =
-    useForm<ITransformResolver>({
-      mode: 'onChange',
-      resolver: transformResolver,
-      defaultValues: {
-        tags: 'nuevo,restauración',
-        title: 'Titulo de ejemplo',
-        visibility: 'public',
-        color: PASTEL_COLORS.white.join()
-      }
-    })
-  const { errors: err } = formState
-  const color = watch('color')
-  useEffect(() => {
-    const values = color.split(',')
-    if (!Array.isArray(values)) return
-    const parent = document.querySelector('body')
-    if (!parent || !(parent instanceof HTMLElement)) return
-    const [from, to] = values
-    parent.style.background = `radial-gradient(
-      circle at 20% 0%,
-      var(--bg-primary) 10%,
-      ${from} 80%,
-      ${to} 100%
-    )`
-    return () => {
-      parent.style.background = 'var(--bg-secondary)'
-    }
-  }, [color])
-
-  useEffect(() => {
-    if (!user) return
-    const { firstName, lastName, username } = user
-    const author = `${firstName ?? username} ${lastName ?? ''}`
-    setValue('author', author)
-  }, [setValue, user])
-
-  const onError = (): void => {
-    console.error('Error: ', err)
-  }
-
-  const onSubmit = async (data: ITransformResolver) => {
-    console.log('submit ', data)
-    toast.loading({
-      text: 'Cargando'
-    })
-  }
+  const { handleSubmit, onSubmit, onError, register, watch, err, setValue, trigger, loading } =
+    useTransformForm()
 
   return (
     <form className='dsTransform' onSubmit={handleSubmit(onSubmit, onError)}>
@@ -122,24 +72,7 @@ const TransformForm = (): JSX.Element => {
             {watch('publicId')}
           </Link>
         </div>
-        <div className={`dsTransform-control ${acl(!!err.color, 'error')}`}>
-          <p className='dsTransform-control__error'>{err.color?.message}</p>
-          <div className='dsTransform-input color'>
-            <h4 className='dsTransform-input__tag'>Color 🎨</h4>
-            <aside className='dsTransform-input__colors'>
-              {Object.values(PASTEL_COLORS).map(color => {
-                const [from, to] = color
-                const bg = `linear-gradient(135deg, ${from}, ${to})`
-                return (
-                  <label key={from} style={{ backgroundImage: bg }}>
-                    <input type='radio' value={color.join()} {...register('color')} />
-                  </label>
-                )
-              })}
-            </aside>
-          </div>
-        </div>
-        <BigButton />
+        <BigButton state={loading} />
       </article>
       <article className={`dsTransform-article dropzone ${acl(!!err.image, 'error')}`}>
         {err.image && <p className='dsTransform-control__error'>{err.image?.message}</p>}
@@ -148,7 +81,6 @@ const TransformForm = (): JSX.Element => {
             setValue('image', image)
             setValue('publicId', temporalLink)
             trigger('image')
-            console.log(image, temporalLink)
           }}
         />
       </article>

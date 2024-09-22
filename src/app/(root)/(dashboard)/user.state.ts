@@ -1,16 +1,23 @@
-import IUser from '@/db/types/user.type'
+import { User } from '@prisma/client'
 import { create } from 'zustand'
 
-interface IUserStore extends IUser {
-  setUser: (user: IUser) => void
+interface IStoreUser {
+  setUser: (user: User) => void
 }
 
-const userStore = create<IUserStore>(set => ({
+const userStore = create<User & IStoreUser>(set => ({
+  id: 0,
+  createdAt: new Date(),
+  updatedAt: new Date(),
   clerkId: '',
   email: '',
   photo: '',
   username: '',
-  setUser(user) {
+  firstName: '',
+  lastName: '',
+  creditBalance: 0,
+  planId: 0,
+  setUser(user: User) {
     return set(() => ({ ...user }))
   }
 }))

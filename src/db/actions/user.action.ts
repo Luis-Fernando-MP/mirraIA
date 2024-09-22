@@ -1,18 +1,19 @@
 'use server'
 
 import { handleError } from '@/shared/lib/utils'
-import { revalidatePath } from 'next/cache'
+import { User } from '@prisma/client'
 
-import db from '..'
-import User from '../models/User'
-import IUser from '../types/user.type'
+import prisma from '..'
 
-export async function createUser(user: IUser) {
+export async function createUser(user: User) {
   try {
-    await db()
-    const isCreated = await User.create(user)
+    const existUser = await prisma.user.findUnique({
+      where: { clerkId: user.clerkId }
+    })
+    if (existUser) throw new Error('The user exist')
+    const isCreated = await prisma.user.create({ data: user })
     if (!isCreated) throw new Error('Ups!! there are an Error to create new user')
-    return JSON.parse(JSON.stringify(isCreated)) as IUser
+    return isCreated
   } catch (error) {
     handleError(error)
   }
@@ -20,23 +21,24 @@ export async function createUser(user: IUser) {
 
 export async function getUserById(clerkId: string) {
   try {
-    await db()
-    const user = await User.findOne({ clerkId })
+    const user = await prisma.user.findUnique({
+      where: { clerkId }
+    })
     if (!user) throw new Error('The user not found')
-    return JSON.parse(JSON.stringify(user)) as IUser
+    return user
   } catch (error) {
     handleError(error)
   }
 }
 
-export async function updateUser(clerkId: string, user: any) {
+export async function updateUser(clerkId: string, userData: any) {
   try {
-    await db()
-    const updatedUser = await User.findOneAndUpdate({ clerkId }, user, {
-      new: true
+    const updatedUser = await prisma.user.update({
+      where: { clerkId },
+      data: userData
     })
     if (!updatedUser) throw new Error('User update failed')
-    return JSON.parse(JSON.stringify(updateUser)) as IUser
+    return updatedUser
   } catch (error) {
     handleError(error)
   }
@@ -44,13 +46,10 @@ export async function updateUser(clerkId: string, user: any) {
 
 export async function deleteUser(clerkId: string) {
   try {
-    await db()
-    const isDeleted = await User.findOneAndDelete({ clerkId })
-    if (!isDeleted) {
-      throw new Error('Fail to deled user')
-    }
-    revalidatePath('/')
-    return JSON.parse(JSON.stringify(isDeleted)) as IUser
+    const deletedUser = await prisma.user.delete({
+      where: { clerkId }
+    })
+    return deletedUser
   } catch (error) {
     handleError(error)
   }
@@ -58,14 +57,16 @@ export async function deleteUser(clerkId: string) {
 
 export async function updateCredits(clerkId: string, credits: number) {
   try {
-    await db()
-    const isUpdated = await User.findOneAndUpdate(
-      { clerkId },
-      { $inc: { creditBalance: credits } },
-      { new: true }
-    )
-    if (!isUpdated) throw new Error('User credits update failed')
-    return isUpdated
+    const updatedUser = await prisma.user.update({
+      where: { clerkId },
+      data: {
+        creditBalance: {
+          increment: credits
+        }
+      }
+    })
+    if (!updatedUser) throw new Error('User credits update failed')
+    return updatedUser
   } catch (error) {
     handleError(error)
   }

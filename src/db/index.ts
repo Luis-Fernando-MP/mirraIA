@@ -1,31 +1,16 @@
-import { DB_URL } from '@/shared/lib/constants'
-import mongoose, { Mongoose } from 'mongoose'
+import { IS_PRODUCTION } from '@/shared/lib/constants'
+import { PrismaClient } from '@prisma/client'
 
-interface IConnection {
-  conn: Mongoose | null
-  promise: Promise<Mongoose> | null
+const prismaClientSingleton = () => {
+  return new PrismaClient()
 }
 
-let cached: IConnection = (global as any).mongoose
+declare const globalThis: {
+  prismaGlobal: ReturnType<typeof prismaClientSingleton>
+} & typeof global
 
-if (!cached) {
-  cached = (global as any).mongoose = {
-    conn: null,
-    promise: null
-  }
-}
+const prisma = globalThis.prismaGlobal ?? prismaClientSingleton()
 
-const db = async () => {
-  if (cached.conn) return cached.conn
-  if (!DB_URL) throw new Error('Missing db url')
+export default prisma
 
-  cached.promise ??= mongoose.connect(DB_URL, {
-    dbName: 'ju-images',
-    bufferCommands: false
-  })
-
-  cached.conn = await cached.promise
-  return cached.conn
-}
-
-export default db
+if (IS_PRODUCTION !== 'production') globalThis.prismaGlobal = prisma

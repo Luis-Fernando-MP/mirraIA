@@ -1,3 +1,5 @@
+import { Visibility } from '@prisma/client'
+
 type ICldColors = [string, number]
 export interface CldImageResponse {
   public_id: string
@@ -15,10 +17,10 @@ export interface CldImageResponse {
 export interface ITransformFormData {
   title: string
   transformationType: string
-  visibility: string
+  visibility: Visibility
   publicId: string
   tags: string
   authorEditor: string
-  author: string
+  author: number
   image: File
 }

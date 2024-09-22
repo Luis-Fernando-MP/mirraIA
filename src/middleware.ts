@@ -1,22 +1,19 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
-export const isProtectedRoute = createRouteMatcher(['/dashboard(.*)', '/forum(.*)'])
-
-export default clerkMiddleware((auth, req) => {
-  if (!auth().userId && isProtectedRoute(req)) {
-    // Add custom logic to run before redirecting
-    return auth().redirectToSignIn()
+const isPublicRoute = createRouteMatcher([
+  '/',
+  '/sign-in(.*)',
+  '/sign-up(.*)',
+  '/api/ping',
+  '/api/transform/image',
+  '/api/webhooks/clerk',
+  '/api/webhooks/stripe'
+])
+export default clerkMiddleware((auth, request) => {
+  if (!isPublicRoute(request)) {
+    auth().protect()
   }
 })
-
 export const config = {
-  matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-    // Always run for API routes
-    '/(api|trpc)(.*)',
-    '/',
-    '/api/webhooks/clerk',
-    '/api/webhooks/stripe'
-  ]
+  matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)']
 }

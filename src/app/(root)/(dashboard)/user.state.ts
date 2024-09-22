@@ -1,11 +1,14 @@
 import { User } from '@prisma/client'
 import { create } from 'zustand'
 
-interface IUserStore extends Partial<User> {
+interface IUserStore extends User {
   setUser: (user: User) => void
 }
 
 const userStore = create<IUserStore>(set => ({
+  id: 0,
+  createdAt: new Date(),
+  updatedAt: new Date(),
   clerkId: '',
   email: '',
   photo: '',

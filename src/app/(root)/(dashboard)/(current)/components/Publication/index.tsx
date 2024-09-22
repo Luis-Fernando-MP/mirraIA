@@ -20,11 +20,11 @@ dayjs.locale('es')
 dayjs.extend(relativeTime)
 
 const Publication = ({ publication }: IPublication): JSX.Element => {
-  const { _id, publicId, transformationType, author, updatedAt, title } = publication
+  const { id, publicId, transformationType, author, updatedAt, title } = publication
   const { photo, username, firstName } = author
   const userName = username ?? firstName ?? ''
   return (
-    <Link href={`/image/${String(_id)}`} className='dPublication'>
+    <Link href={`/image/${String(id)}`} className='dPublication'>
       <CldImageComponent publicId={publicId} alt={title} className='dPublication-image' />
       <p className='dPublication-transformation'>{transformationType}</p>
       <button className='dPublication-user'>

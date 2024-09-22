@@ -26,7 +26,7 @@ export const cldSaveImage = async ({ url, author, options }: ISaveImage) => {
 }
 
 interface IUploadCloudinaryStream {
-  author: string
+  author: number
   arrayBuffer: ArrayBuffer
 }
 export const uploadCloudinaryStream = async ({
@@ -58,7 +58,7 @@ export const uploadCloudinaryBase64 = async ({
 }: IUploadCloudinaryStream): Promise<CldImageResponse> => {
   try {
     const buffer = Buffer.from(arrayBuffer)
-    const tmpID = `${CLD_FOLDER}/${author}/transformed-${randomUUID()}`
+    const tmpID = `${CLD_FOLDER}/user-${String(author)}/transformed-${randomUUID()}`
 
     const uploadResponse = await cloudinary.uploader.upload(
       `data:image/jpeg;base64,${buffer.toString('base64')}`,

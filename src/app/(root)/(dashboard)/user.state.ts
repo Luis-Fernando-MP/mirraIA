@@ -1,8 +1,8 @@
-import IUser from '@/db/types/user.type'
+import { User } from '@prisma/client'
 import { create } from 'zustand'
 
-interface IUserStore extends IUser {
-  setUser: (user: IUser) => void
+interface IUserStore extends Partial<User> {
+  setUser: (user: User) => void
 }
 
 const userStore = create<IUserStore>(set => ({

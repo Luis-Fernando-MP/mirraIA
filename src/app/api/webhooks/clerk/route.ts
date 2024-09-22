@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { createUser, deleteUser, updateUser } from '@/db/actions/user.action'
-import IUser from '@/db/types/user.type'
 import { WebhookEvent } from '@clerk/nextjs/server'
+import { User } from '@prisma/client'
 import { headers } from 'next/headers'
 import { NextResponse } from 'next/server'
 import { Webhook } from 'svix'
@@ -47,8 +47,7 @@ async function handler(req: Request) {
   try {
     if (eventType === 'user.created') {
       const { id, email_addresses, image_url, first_name, last_name, username } = evt.data
-
-      const user: IUser = {
+      const user = {
         clerkId: id,
         email: email_addresses[0].email_address,
         username: username ?? first_name ?? '',
@@ -56,7 +55,7 @@ async function handler(req: Request) {
         lastName: last_name ?? '',
         photo: image_url ?? ''
       }
-      const newUser = await createUser(user)
+      const newUser = await createUser(user as User)
       return NextResponse.json({ message: 'OK', user: newUser })
     }
 

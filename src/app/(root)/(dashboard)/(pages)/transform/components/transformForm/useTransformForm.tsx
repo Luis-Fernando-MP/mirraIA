@@ -25,7 +25,7 @@ const useTransformForm = () => {
   useEffect(() => {
     if (!user) return
     const { firstName, lastName, username } = user
-    const author = `${firstName ?? username} ${lastName ?? ''}`
+    const author = `${String(firstName ?? username)} ${lastName ?? ''}`
     setValue('author', author)
   }, [setValue, user])
 
@@ -44,7 +44,7 @@ const useTransformForm = () => {
     formData.append('publicId', publicId)
     formData.append('tags', tags)
     formData.append('authorEditor', author)
-    formData.append('author', String(user._id))
+    formData.append('author', String(user.id))
     formData.append('image', image)
 
     const toastId = toast.loading('Cargando...', { id: 'transformImage' })

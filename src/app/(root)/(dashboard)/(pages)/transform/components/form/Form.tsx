@@ -18,13 +18,13 @@ const Form = (): JSX.Element | null => {
     resolver: restoreResolver
   })
   const { errors: err } = formState
-  const { _id } = userStore()
+  const { id } = userStore()
   const { startChars, dateChars, randomChars } = useMemo(
-    () => generateImageName(JSON.parse(JSON.stringify(_id))),
-    [_id]
+    () => generateImageName(JSON.parse(JSON.stringify(id))),
+    [id]
   )
 
-  if (!_id) return null
+  if (!id) return null
   const onError = (): void => {
     console.error('Error en el formulario:', err)
   }
@@ -44,7 +44,7 @@ const Form = (): JSX.Element | null => {
     const formData = new FormData()
     formData.append('file', file)
     formData.append('upload_preset', CLD_PRESET)
-    formData.append('public_id', `${String(_id)}/${randomChars}`)
+    formData.append('public_id', `${String(id)}/${randomChars}`)
 
     try {
       const response = await axios.post(

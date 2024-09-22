@@ -17,7 +17,6 @@ export const metadata: Metadata = {
 const RootLayout = async ({ children }: IRootLayout): Promise<JSX.Element> => {
   const { userId } = auth()
   let user = null
-
   if (userId) {
     try {
       user = await getUserById(userId)

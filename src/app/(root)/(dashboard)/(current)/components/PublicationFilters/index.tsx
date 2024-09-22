@@ -1,7 +1,7 @@
 'use client'
 
 import { getImagesByQuery } from '@/db/actions/image.action'
-import type { TFilterKeys, TImagesQuery } from '@/db/helpers/filters'
+import type { TFilterKeys } from '@/db/helpers/filters'
 import imagesFilter from '@/db/helpers/filters'
 import { acl } from '@/shared/lib/activeClass'
 import { type JSX, useState } from 'react'
@@ -33,7 +33,7 @@ const PublicationFilters = (): JSX.Element | null => {
   const publicationsIsEmpty = publications.length < 1
   if (publicationsIsEmpty) return null
 
-  const handleFilter = async (query: TImagesQuery, filter: TFilterKeys) => {
+  const handleFilter = async (query: any, filter: TFilterKeys) => {
     const newData = await getImagesByQuery({ query })
     setPubs(newData.images)
     setFilter(filter)

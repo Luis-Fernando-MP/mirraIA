@@ -1,6 +1,6 @@
 'use client'
 
-import IUser from '@/db/types/user.type'
+import { User } from '@prisma/client'
 import type { JSX, ReactNode } from 'react'
 
 import Header from './components/Header'
@@ -11,7 +11,7 @@ import userStore from './user.state'
 
 interface IDashboard {
   children?: Readonly<ReactNode[]> | null | Readonly<ReactNode>
-  user: IUser | null
+  user: User | null
 }
 
 const Dashboard = ({ children, user }: IDashboard): JSX.Element => {

@@ -1,11 +1,11 @@
 import { User } from '@prisma/client'
 import { create } from 'zustand'
 
-interface IUserStore extends User {
+interface IStoreUser {
   setUser: (user: User) => void
 }
 
-const userStore = create<IUserStore>(set => ({
+const userStore = create<User & IStoreUser>(set => ({
   id: 0,
   createdAt: new Date(),
   updatedAt: new Date(),
@@ -17,7 +17,7 @@ const userStore = create<IUserStore>(set => ({
   lastName: '',
   creditBalance: 0,
   planId: 0,
-  setUser(user) {
+  setUser(user: User) {
     return set(() => ({ ...user }))
   }
 }))

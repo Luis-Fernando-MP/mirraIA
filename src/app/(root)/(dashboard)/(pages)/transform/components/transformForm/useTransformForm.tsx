@@ -44,7 +44,7 @@ const useTransformForm = () => {
     formData.append('publicId', publicId)
     formData.append('tags', tags)
     formData.append('authorEditor', author)
-    formData.append('author', String(user.id))
+    formData.append('author', String(user.id ?? 0))
     formData.append('image', image)
 
     const toastId = toast.loading('Cargando...', { id: 'transformImage' })

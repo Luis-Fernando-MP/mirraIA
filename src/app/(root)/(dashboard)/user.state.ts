@@ -10,6 +10,10 @@ const userStore = create<IUserStore>(set => ({
   email: '',
   photo: '',
   username: '',
+  firstName: '',
+  lastName: '',
+  creditBalance: 0,
+  planId: 0,
   setUser(user) {
     return set(() => ({ ...user }))
   }

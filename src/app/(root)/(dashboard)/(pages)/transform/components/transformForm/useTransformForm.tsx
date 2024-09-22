@@ -24,8 +24,7 @@ const useTransformForm = () => {
 
   useEffect(() => {
     if (!user) return
-    const { firstName, lastName, username } = user
-    const author = `${String(firstName ?? username)} ${lastName ?? ''}`
+    const author = `${String(user?.firstName ?? user?.username ?? '')} ${user?.lastName ?? ''}`
     setValue('author', author)
   }, [setValue, user])
 

@@ -3,14 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "turbo": "rimraf .next && pnpm store prune && pnpm dev",
     "prisma:init": "pnpx prisma init --datasource-provider mysql",
     "prisma:migrate": "pnpx prisma migrate dev",
+    "prisma:generate": "pnpx prisma generate",
     "rok": "ngrok http http://127.0.0.1:3000"
   },
   "dependencies": {

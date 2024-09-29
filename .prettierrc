@@ -1,17 +1,11 @@
 {
-  "bracketSameLine": false,
+  "singleQuote": true,
+  "jsxSingleQuote": true,
+  "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
   "importOrder": ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
-  "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
-  "overrides": [
-    {
-      "files": ["*.json", "*.md", "*.toml", "*.yml"],
-      "options": {
-        "useTabs": false
-      }
-    }
-  ],
+  "bracketSameLine": false,
   "arrowParens": "avoid",
   "bracketSpacing": true,
   "embeddedLanguageFormatting": "auto",
@@ -21,11 +15,9 @@
   "quoteProps": "as-needed",
   "requirePragma": false,
   "semi": false,
-  "singleQuote": true,
   "tabWidth": 2,
   "trailingComma": "none",
   "printWidth": 100,
-  "jsxSingleQuote": true,
   "endOfLine": "lf",
   "useTabs": false
 }

@@ -1,15 +1,14 @@
 {
-  "name": "JuliChat",
-  "version": "0.1.0",
+  "name": "mirra-ia",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "postinstall": "npx prisma generate",
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "rimraf .next && pnpm store prune && next dev",
+    "build": "pnpm lint && next build",
     "start": "next start",
-    "lint": "next lint",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "turbo": "rimraf .next && pnpm store prune && pnpm dev",
+    "lint": "npx stylelint '**/*.{css,scss}' && next lint",
+    "format": "pnpx stylelint '**/*.{css,scss}' --fix && prettier --write '**/*.{js,jsx,ts,tsx,json,md,scss,css}'",
     "prisma:init": "pnpx prisma init --datasource-provider mysql",
     "prisma:migrate": "pnpx prisma migrate dev",
     "prisma:generate": "pnpx prisma generate",
@@ -24,8 +23,6 @@
     "cloudinary": "2.4.0",
     "dayjs": "1.11.13",
     "lucide-react": "0.435.0",
-    "mongodb": "6.8.0",
-    "mongoose": "8.5.3",
     "next": "14.2.5",
     "next-cloudinary": "6.11.0",
     "react": "18.3.1",
@@ -39,30 +36,26 @@
     "zustand": "4.5.5"
   },
   "devDependencies": {
-    "@trivago/prettier-plugin-sort-imports": "4.3.0",
-    "@types/node": "20.16.1",
-    "@types/react": "18.3.3",
+    "@types/node": "22.7.4",
+    "@types/react": "18.3.10",
     "@types/react-dom": "18.3.0",
-    "@typescript-eslint/typescript-estree": "8.2.0",
-    "eslint": "8.57.0",
-    "eslint-config-next": "14.2.4",
+    "eslint": "8.57.1",
+    "eslint-config-next": "14.2.13",
     "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-prettier": "5.2.1",
-    "eslint-plugin-react": "7.35.0",
     "eslint-plugin-tailwindcss": "3.17.4",
-    "postcss": "8.4.41",
+    "postcss": "8.4.47",
     "prettier": "3.3.3",
-    "prettier-plugin-tailwindcss": "0.6.6",
+    "prettier-plugin-tailwindcss": "^0.6.8",
     "rimraf": "6.0.1",
-    "sass": "1.77.0",
-    "tailwindcss": "3.4.10",
-    "ts-standard": "12.0.2",
-    "two-up-element": "1.0.1",
-    "typescript": "5.5.4"
-  },
-  "eslintConfig": {
-    "extends": [
-      "./.eslintrc.json"
-    ]
+    "sass": "1.79.3",
+    "stylelint": "16.9.0",
+    "stylelint-config-clean-order": "6.1.0",
+    "stylelint-config-standard": "36.0.1",
+    "stylelint-config-standard-scss": "13.1.0",
+    "stylelint-config-two-dash-bem": "1.0.0",
+    "tailwindcss": "3.4.13",
+    "typescript": "5.6.2",
+    "@trivago/prettier-plugin-sort-imports": "4.3.0",
+    "two-up-element": "1.0.1"
   }
 }

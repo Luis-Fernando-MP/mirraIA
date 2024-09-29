@@ -1,6 +1,6 @@
-@use '@/sass/utils/media' as m;
+@use '@sass/utils/media' as m;
 
-@include m.smallScreen() {
+@include m.smallScreen {
   .dCommunityPubs {
     align-items: center;
     justify-content: center;

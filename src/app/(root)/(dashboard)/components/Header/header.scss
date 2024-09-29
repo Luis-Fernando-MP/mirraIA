@@ -1,26 +1,33 @@
-@use '@/sass/config/vars' as v;
-@use '@/sass/utils/defs' as d;
+@use '@sass/config/vars' as v;
+@use '@sass/utils/defs' as d;
 
 .dsHeader {
   @include d.flex($dir: row);
-  @include v.border();
-  border-radius: v.$radius;
-  box-shadow: v.$sha1;
+  @include v.border;
+
+  flex-wrap: wrap;
   justify-content: space-between;
+
+  width: 100%;
   min-height: 50px;
   padding: 10px v.$padding;
-  flex-wrap: wrap;
-  width: 100%;
+
+  border-radius: v.$radius;
+  box-shadow: v.$sha1;
+
   &-box {
-    @include d.flex($dir: row, $ali: center, $gap: 0px);
+    @include d.flex($dir: row, $ali: center, $gap: 0);
+
     &.user {
       @include v.border(v.$bg2);
-      border-radius: 5px;
+
       padding: 3px 5px;
+      border-radius: 5px;
     }
   }
+
   .logo {
-    height: 35px;
     width: 35px;
+    height: 35px;
   }
 }

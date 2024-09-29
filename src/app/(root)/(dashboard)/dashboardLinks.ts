@@ -1,13 +1,6 @@
-import Chest from '@/shared/ui/icons/Chest'
-import {
-  BaggageClaimIcon,
-  BookImageIcon,
-  HouseIcon,
-  MicroscopeIcon,
-  PackageMinusIcon,
-  ScanSearchIcon,
-  SprayCanIcon
-} from 'lucide-react'
+import Chest from '@/shared/ui/icons/Chest';
+import { BaggageClaimIcon, BookImageIcon, HouseIcon, MicroscopeIcon, PackageMinusIcon, ScanSearchIcon, SprayCanIcon } from 'lucide-react';
+
 
 export type TTransformations =
   | 'restore'
@@ -19,7 +12,7 @@ export type TTransformations =
 
 const dashboardLinks = {
   chess: {
-    Labrada: 'Archivos',
+    label: 'Archivos',
     route: '/files',
     Icon: Chest,
     shortTitle: 'Archivos',

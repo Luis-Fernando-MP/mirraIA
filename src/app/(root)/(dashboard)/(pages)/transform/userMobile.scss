@@ -1,21 +1,21 @@
-@use '@/sass/utils/media' as m;
+@use '@sass/utils/media' as m;
 
-@include m.bigScreen() {
+@include m.bigScreen {
   .dashboard-body.trsDashboard {
     flex-direction: column-reverse;
   }
 }
 
-@include m.extraLargeScreen() {
+@include m.extraLargeScreen {
   .dashboard-body.trsDashboard .dsRSContainer {
+    overflow: inherit;
     height: auto;
     min-height: auto;
     max-height: fit-content;
-    overflow: inherit;
   }
 }
 
-@include m.smallerScreen() {
+@include m.smallerScreen {
   .dashboard-body.trsDashboard .dsRSContainer {
     padding: 10px 0;
   }

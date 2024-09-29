@@ -1,42 +1,119 @@
-@use '@/sass/utils/scrollbar';
-@use '@/sass/config/vars' as *;
-@use '@/sass/utils/media' as m;
-@use '@/sass/utils/text' as t;
+@use '@sass/utils/scrollbar';
+@use '@sass/config/vars' as *;
+@use '@sass/utils/media' as m;
+@use '@sass/utils/text' as t;
 
 *,
 ::before,
 ::after {
   box-sizing: border-box;
   margin: 0;
-  outline: none;
   padding: 0;
+
+  border: none;
+  outline: none;
 }
 
 body {
   @extend %scroll-hidden;
-  background-color: $bg2;
-  color: $fn1, $fontBase;
+
+  position: relative;
+
+  overflow: hidden;
+
+  width: 100dvw;
+  height: 100dvh;
+  min-height: 100dvh;
+  max-height: 100dvh;
+
   font-family: $font1;
   font-size: $family-size;
-  min-height: 100dvh;
-  height: 100dvh;
-  max-height: 100dvh;
   line-height: 1.25;
-  overflow: hidden;
-  position: relative;
-  width: 100dvw;
+  color: $fn1, $fontBase;
+
+  background-color: $bg2;
+
+  textarea {
+    @extend %scroll-hidden;
+
+    resize: none;
+  }
+
+  button {
+    cursor: pointer;
+
+    width: fit-content;
+    height: fit-content;
+    margin: none;
+
+    background-color: $bg2;
+
+    @include hoverS;
+  }
+
+  input,
+  textarea,
+  button,
+  select,
+  p {
+    font-size: $fP;
+  }
+
+  p,
+  a,
+  span,
+  small,
+  input,
+  textarea,
+  button,
+  select {
+    text-wrap: pretty;
+  }
+
+  a {
+    display: block;
+    text-decoration: none;
+  }
+
+  span {
+    font-family: $font3;
+    font-weight: 400;
+    color: $fn2;
+  }
+
+  h5 {
+    font-weight: 500;
+  }
+
+  p {
+    font-weight: 400;
+  }
+
+  h5,
+  p,
+  a,
+  input,
+  textarea,
+  button,
+  select {
+    font-family: $font2;
+    color: $fn2;
+
+    &:focus {
+      outline: none;
+    }
+  }
 }
 
 $listOfFontsSize: (
-  '.title': $fXl,
+  '.xl': $fXl,
   'h1': $fH1,
   'h2': $fH2,
   'h3': $fH3,
   'h4': $fH4,
   'h5': $fH5,
   'p': $fP,
-  'span': $fSpan,
-  'small': $fSmall
+  'span': $fSpan
 );
 
 @each $tag, $value in $listOfFontsSize {
@@ -49,29 +126,8 @@ h1,
 h2,
 h3,
 h4 {
-  color: $fn1;
   font-family: $font1;
-}
-
-h5,
-p,
-a,
-input,
-textarea,
-button,
-select {
-  color: $fn2;
-  font-family: $font2;
-  &:focus {
-    outline: none;
-  }
-}
-
-span,
-small {
-  color: $fn2;
-  font-family: $font3;
-  font-weight: 400;
+  color: $fn1;
 }
 
 h1 {
@@ -86,18 +142,8 @@ h3 {
   font-weight: 700;
 }
 
-h4,
-h5 {
-  font-weight: 500;
-}
-
-p,
-input,
-textarea,
-button,
-select {
-  font-weight: 400;
-  font-size: $fP;
+h4 {
+  font-weight: 600;
 }
 
 h1,
@@ -108,104 +154,64 @@ h5 {
   text-wrap: balance;
 }
 
-p,
-a,
-span,
-small,
-input,
-textarea,
-button,
-select {
-  text-wrap: pretty;
-}
-
-textarea {
-  resize: none;
-  @extend %scroll-hidden;
-}
-
 ul {
   list-style: none;
 }
 
-a {
-  display: block;
-  text-decoration: none;
-}
-
-button {
-  border: none;
-  cursor: pointer;
-  @include hoverS;
-}
-
-small {
-  font-style: italic;
-}
-
-.btn {
-  padding: 8px 10px;
-  border-radius: $radius;
-  @include hoverS;
-}
-
 svg {
-  width: 20px;
-  height: 20px;
   display: block;
+  width: 1.5em;
+  height: 1.5em;
+  font-size: $family-size;
 }
 
-@include m.smallerScreen() {
+@include m.smallerScreen {
   body {
     font-size: 10px;
   }
 }
 
-.gr {
-  @include t.textGradient;
-}
+.skeleton {
+  display: block;
+  min-width: 35px;
+  min-height: 35px;
+  background-color: #f6f4ff;
 
-.bgr {
-  background-image: $gr1;
-  color: $bg1;
-  opacity: 1;
-  border: 2px solid transparent;
-  font-size: $fH5;
-  font-weight: 400;
-  &.inactive {
-    background-image: none;
-    background-color: $bg3;
-    color: $fn1;
-    user-select: none;
-    opacity: 0.6;
-    cursor: not-allowed;
+  &.radius {
+    border-radius: $radius;
   }
-  &.big {
-    text-align: center;
-    font-size: $fH5;
-    font-weight: 500;
+
+  &,
+  &-co {
+    animation: bounce 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  &-co {
+    background-color: #efeaff;
+  }
+
+  @keyframes bounce {
+    50% {
+      opacity: 0.5;
+    }
   }
 }
 
 .logo {
+  display: block;
+
   min-width: 60px;
   height: 100%;
-  object-fit: cover;
   padding: 5px 0;
-  display: block;
+
+  object-fit: cover;
+
   &-container {
     text-align: center;
   }
 }
 
-//clerk
+// clerk
 .cl-rootBox button:focus {
   box-shadow: none;
-}
-
-.disable {
-  user-select: none;
-  pointer-events: none;
-  opacity: 0.9;
-  background-color: $fn2 !important;
 }

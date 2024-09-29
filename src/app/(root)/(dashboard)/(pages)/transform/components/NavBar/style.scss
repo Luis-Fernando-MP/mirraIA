@@ -1,31 +1,41 @@
-@use '@/sass/config/vars' as v;
-@use '@/sass/utils/defs' as d;
-@use '@/sass/utils/scrollbar';
+@use '@sass/config/vars' as v;
+@use '@sass/utils/defs' as d;
+@use '@sass/utils/scrollbar';
 
 .dsRS {
   &Nav {
     @extend %scroll-hidden;
+
     @include d.flex;
     @include v.border;
-    border-radius: v.$radius;
-    height: 100%;
+
+    overflow: auto;
+
+    width: 300px;
     min-width: 300px;
     max-width: 300px;
-    width: 300px;
-    overflow: auto;
+    height: 100%;
     padding: v.$padding;
+
+    border-radius: v.$radius;
+
     &-link {
       width: 270px;
-      border-radius: v.$radius / 2;
-      background-color: v.$bg3;
-      @include d.flex($ali: center);
       padding: v.$padding;
+      background-color: v.$bg3;
+      border-radius: v.$radius / 2;
+
+      @include d.flex($ali: center);
       @include v.hoverS($scale: 0.98);
     }
+
     &-title {
       width: 270px;
+
       @include d.flex($gap: v.$padding * 0.5);
+
       padding: v.$padding;
+
       h2,
       p {
         text-align: center;

@@ -1,49 +1,60 @@
-@use '@/sass/config/vars' as v;
-@use '@/sass/utils/defs' as d;
+@use '@sass/config/vars' as v;
+@use '@sass/utils/defs' as d;
 
 .customDropzone {
   width: 100%;
   height: 100%;
+
   &:has(.customDropzone-content.active) {
     animation: onDrag 0.5s ease-in-out infinite alternate;
   }
+
   &-content {
     @include d.flex($ali: center);
-    background-color: v.$bg2;
+
     justify-content: center;
+    background-color: v.$bg2;
+
     p {
       text-align: center;
     }
   }
+
   @keyframes onDrag {
-    from {
+    to {
       scale: 1;
     }
+
     from {
       scale: 0.99;
     }
   }
+
   &-tag {
-    background-color: v.$bg1;
-    border-radius: 3px;
-    left: v.$padding;
-    padding: v.$padding * 0.5;
     position: absolute;
     top: v.$padding;
+    left: v.$padding;
+
+    padding: v.$padding * 0.5;
+
+    background-color: v.$bg1;
+    border-radius: 3px;
   }
 
   &-dropHere,
   &-choseFile {
     padding: v.$padding * 0.5 v.$padding;
-    border-radius: v.$padding * 0.5;
     font-size: v.$fH5;
+    border-radius: v.$padding * 0.5;
   }
+
   &-choseFile {
     color: v.$bg1;
     background-color: v.$tn1;
   }
+
   &-dropHere {
-    background-color: v.$bg3;
     color: v.$fn1;
+    background-color: v.$bg3;
   }
 }

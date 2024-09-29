@@ -1,11 +1,13 @@
-@use '@/sass/config/vars' as v;
-@use '@/sass/utils/defs' as d;
-@use '@/sass/utils/scrollbar' as *;
+@use '@sass/config/vars' as v;
+@use '@sass/utils/defs' as d;
+@use '@sass/utils/scrollbar' as *;
 
 .dashboard-body.files {
-  background-color: v.$bg1;
-  padding: v.$padding * 2;
   @extend %scroll-hidden;
+
   overflow-y: scroll;
+  padding: v.$padding * 2;
+  background-color: v.$bg1;
+
   @include d.flex;
 }

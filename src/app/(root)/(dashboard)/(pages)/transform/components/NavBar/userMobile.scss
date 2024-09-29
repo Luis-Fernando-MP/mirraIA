@@ -1,16 +1,17 @@
-@use '@/sass/utils/media' as m;
+@use '@sass/utils/media' as m;
 
-@include m.bigScreen() {
+@include m.bigScreen {
   .dashboard-body.trsDashboard .dsRSNav {
-    flex-wrap: wrap;
-    flex-direction: row;
+    overflow: visible;
+    flex-flow: row wrap;
+    align-items: flex-start;
     justify-content: center;
+
     width: 100%;
-    min-height: auto;
     min-width: 100%;
     height: max-content;
-    overflow: visible;
-    align-items: flex-start;
+    min-height: auto;
+
     img {
       height: 100%;
     }

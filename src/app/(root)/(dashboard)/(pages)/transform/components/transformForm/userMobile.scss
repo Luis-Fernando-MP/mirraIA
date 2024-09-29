@@ -1,47 +1,53 @@
-@use '@/sass/config/vars' as v;
-@use '@/sass/utils/defs' as d;
-@use '@/sass/utils/media' as m;
+@use '@sass/config/vars' as v;
+@use '@sass/utils/defs' as d;
+@use '@sass/utils/media' as m;
 
-@include m.extraLargeScreen() {
+@include m.extraLargeScreen {
   .dsRSContainer {
     align-items: center;
   }
+
   .restore-description {
     text-align: center;
   }
+
   .dsTransform {
     flex-direction: column-reverse;
     align-items: center;
     height: auto;
+
     .bigButton {
       max-width: 300px;
     }
+
     &-article {
       &.requirements {
+        flex-flow: row wrap;
         align-items: center;
-        flex-direction: row;
-        flex-wrap: wrap;
         justify-content: flex-start;
-        max-width: initial;
-        min-width: initial;
+
         width: 50%;
+        min-width: initial;
+        max-width: initial;
       }
+
       &.dropzone {
         width: 80%;
-        min-height: 300px;
         height: max-content;
+        min-height: 300px;
       }
     }
   }
 }
 
-@include m.largeScreen() {
+@include m.largeScreen {
   .dsTransform {
     &-article {
       &.requirements {
         justify-content: center;
         width: 70%;
       }
+
       &.dropzone {
         width: 90%;
       }
@@ -49,22 +55,24 @@
   }
 }
 
-@include m.smallScreen() {
+@include m.smallScreen {
   .dsTransform {
     &-article {
       &.requirements {
         width: 100%;
       }
+
       &.dropzone {
         width: 100%;
       }
     }
+
     &-control,
     &-input.link,
     .bigButton {
       width: 90%;
-      max-width: 90%;
       min-width: 90%;
+      max-width: 90%;
     }
   }
 }

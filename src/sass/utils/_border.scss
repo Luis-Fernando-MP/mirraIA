@@ -1,4 +1,4 @@
-@use '@/sass/config/vars' as v;
+@use '@sass/config/vars' as v;
 
 @mixin gradientBorder($bg: v.$bg1, $gr: v.$gr1, $size: 1px) {
   background:

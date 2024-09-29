@@ -26,6 +26,8 @@ const Meme = async (): Promise<JSX.Element> => {
       </Link>
     )
   } catch (error) {
+    console.error(error)
+
     return <p>fail to load meme</p>
   }
 }

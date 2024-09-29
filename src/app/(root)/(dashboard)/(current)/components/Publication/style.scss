@@ -1,29 +1,32 @@
-@use '@/sass/config/vars' as v;
-@use '@/sass/utils/defs' as d;
+@use '@sass/config/vars' as v;
+@use '@sass/utils/defs' as d;
 
 .dPublication {
   @include v.border(v.$bg2);
   @include d.flex($ali: flex-start);
-  border-radius: v.$radius;
-  padding: v.$padding;
+
   width: fit-content;
   height: fit-content;
+  padding: v.$padding;
+  border-radius: v.$radius;
+
   &-image {
-    border-radius: v.$radius;
     height: 200px;
     object-fit: cover;
+    border-radius: v.$radius;
   }
+
   &-transformation {
     padding: 5px 8px;
-    border-radius: 3px;
     background-color: v.$bg3;
+    border-radius: 3px;
   }
+
   &-user {
     img {
       border-radius: 50%;
     }
-    &__info {
-    }
+
     @include d.flex($dir: row);
   }
 }

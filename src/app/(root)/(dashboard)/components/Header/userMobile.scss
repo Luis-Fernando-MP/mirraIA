@@ -1,19 +1,20 @@
-@use '@/sass/utils/media' as m;
+@use '@sass/utils/media' as m;
 
-@include m.mediumScreen() {
+@include m.mediumScreen {
   .dsHeader {
     .logo-info,
     span.cl-userButtonOuterIdentifier {
       display: none;
     }
+
     &-box.user {
-      border: none;
       background-color: transparent;
+      border: none;
     }
   }
 }
 
-@include m.smallerScreen() {
+@include m.smallerScreen {
   .dsHeader {
     align-items: center;
     justify-content: center;

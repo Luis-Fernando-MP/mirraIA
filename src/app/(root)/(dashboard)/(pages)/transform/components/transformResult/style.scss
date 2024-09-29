@@ -1,9 +1,10 @@
-@use '@/sass/config/vars' as v;
-@use '@/sass/utils/defs' as d;
-@use '@/sass/utils/text' as t;
+@use '@sass/config/vars' as v;
+@use '@sass/utils/defs' as d;
+@use '@sass/utils/text' as t;
 
 .styles_two-up-handle__2kVsP {
   --bar-touch-size: 20px;
+
   &::before {
     background-color: v.$fn2 !important;
   }
@@ -12,103 +13,133 @@
 .styles_scrubber__39cN6 {
   display: none !important;
 }
+
 .tfResult {
   width: 100%;
   height: 100%;
+
   @include d.flex($dir: row);
+
   min-height: auto;
 
   &-info {
-    padding: v.$padding 0;
     width: 300px;
     min-width: 300px;
     max-width: 300px;
-    @include d.flex();
+    padding: v.$padding 0;
+
+    @include d.flex;
   }
+
   &-twoUp {
-    height: 70vh;
-    width: calc(100% - 300px);
     position: relative;
-    padding: v.$padding;
-    border-radius: v.$radius;
+
     overflow: hidden;
+
+    width: calc(100% - 300px);
+    height: 70vh;
+    padding: v.$padding;
+
+    border-radius: v.$radius;
+
     &__download {
       @include v.hoverS;
-      z-index: 2;
+
       position: absolute;
-      bottom: 0;
+      z-index: 2;
       right: 0;
-      padding: v.$padding;
-      border-radius: 50%;
-      background-color: v.$bg1;
+      bottom: 0;
+
       margin: v.$padding;
+      padding: v.$padding;
+
+      background-color: v.$bg1;
+      border-radius: 50%;
     }
   }
+
   two-up {
+    overflow: hidden;
+    justify-content: center;
     width: 100%;
     height: 100%;
-    justify-content: center;
-    overflow: hidden;
+
     img {
-      border-radius: v.$radius;
-      height: 70vh;
       width: auto;
+      height: 70vh;
       object-position: center;
+      border-radius: v.$radius;
     }
   }
 
   &-control {
     width: 100%;
+    padding: v.$padding * 0.4;
+    border-radius: v.$radius * 0.5;
+
     @include v.border(v.$bg2);
     @include d.flex($dir: row, $gap: 10px, $ali: center);
-    border-radius: v.$radius * 0.5;
-    padding: v.$padding * 0.4;
+
     &__tag {
-      background-color: v.$bg1;
-      padding: v.$padding * 0.5;
-      border-radius: 3px;
       width: fit-content;
       min-width: max-content;
+      padding: v.$padding * 0.5;
+
+      background-color: v.$bg1;
+      border-radius: 3px;
     }
+
     &__field {
       width: 100%;
-      border-left: 1px solid v.$bg3;
       padding-left: v.$padding * 0.8;
+      border-left: 1px solid v.$bg3;
+
       @include t.pointers;
     }
+
     // Exenciones al estilo común
     &.tags,
     &.links {
       flex-direction: column;
       align-items: flex-start;
     }
+
     &__link,
     &__tags {
       width: 100%;
       padding-left: v.$padding;
     }
+
     &__tags {
       @include d.flex($dir: row, $gap: v.$padding / 2);
+
       flex-wrap: wrap;
+
       p {
         padding: 5px;
-        border-radius: 2px;
-        background-color: v.$fn2;
         color: v.$bg1;
+        background-color: v.$fn2;
+        border-radius: 2px;
       }
     }
+
     &__link {
-      @include d.flex();
+      @include d.flex;
+
       button {
         @include d.flex($dir: row, $gap: v.$padding / 2, $ali: center);
+
         p {
           color: v.$fn1;
         }
       }
+
       a {
         @include t.pointers;
+
         font-weight: lighter;
       }
+
       svg {
         width: 15px;
       }

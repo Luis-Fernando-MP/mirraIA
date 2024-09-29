@@ -10,7 +10,7 @@ import './style.scss'
 import useTransformForm from './useTransformForm'
 import './userMobile.scss'
 
-const inputValues = {
+export const inputValues = {
   title: {
     tag: 'Título 📝',
     placeholder: 'Titulo de Ejemplo'
@@ -72,7 +72,10 @@ const TransformForm = (): JSX.Element => {
             {watch('publicId')}
           </Link>
         </div>
-        <BigButton state={loading} />
+        <BigButton state={loading} title='Transformar ✨'>
+          Presiona para guardar tu imagen en tu cuenta junto con la transformación aplicada. Podrás
+          acceder y gestionar tus imágenes y cambios fácilmente en cualquier momento
+        </BigButton>
       </article>
       <article className={`dsTransform-article dropzone ${acl(!!err.image, 'error')}`}>
         {err.image && <p className='dsTransform-control__error'>{err.image?.message}</p>}

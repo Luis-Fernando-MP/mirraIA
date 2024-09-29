@@ -1,4 +1,5 @@
 @use '@/sass/config/vars' as v;
+@use '@/sass/utils/scrollbar' as *;
 
 @mixin textGradient($gr: v.$gr1) {
   background: $gr;
@@ -7,8 +8,9 @@
 }
 
 @mixin pointers() {
-  max-width: 100%;
-  overflow: hidden;
+  @extend %scroll-hidden;
+  width: 100%;
+  overflow: auto;
   text-overflow: ellipsis;
   white-space: nowrap;
 }

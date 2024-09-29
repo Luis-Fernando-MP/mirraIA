@@ -27,7 +27,7 @@ const CommunityPublications = ({ community }: ICommunityPublications): JSX.Eleme
   return (
     <div className='dCommunityPubs'>
       {publications.map(img => {
-        return <Publication key={img.author.clerkId} publication={img} />
+        return <Publication key={img.id} publication={img} />
       })}
     </div>
   )

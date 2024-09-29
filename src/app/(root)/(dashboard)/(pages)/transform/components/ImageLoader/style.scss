@@ -1,0 +1,58 @@
+@use '@/sass/config/vars' as v;
+@use '@/sass/utils/defs' as d;
+@use '@/sass/utils/text' as t;
+
+.ImageLoader {
+  width: 100%;
+  height: 100%;
+  &-fallback {
+    animation: fallbackLoading 1.5s infinite;
+    @keyframes fallbackLoading {
+      0%,
+      100% {
+        opacity: 0.6;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+  }
+
+  &-image {
+    display: none;
+    animation: glitchMove 1s ease-in-out forwards;
+    width: 100%;
+    height: auto;
+
+    $glitch-steps: (
+      0%: 0,
+      10%: -20px,
+      20%: 30px,
+      30%: -25px,
+      40%: 35px,
+      50%: -15px,
+      60%: 20px,
+      70%: -10px,
+      80%: 15px,
+      90%: -5px,
+      100%: 0
+    );
+
+    @keyframes glitchMove {
+      @each $percent, $translate in $glitch-steps {
+        #{$percent} {
+          transform: translateX($translate);
+        }
+      }
+    }
+  }
+
+  &.loaded {
+    .ImageLoader-fallback {
+      display: none;
+    }
+    .ImageLoader-image {
+      display: block;
+    }
+  }
+}

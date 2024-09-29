@@ -2,10 +2,10 @@ import { addImage } from '@/db/actions/image.action'
 import cloudinary from '@/shared/cloudinaryConfig'
 import { NextResponse } from 'next/server'
 
+import { uploadCloudinaryBase64 } from '../utils/cld'
+import { getTopCompatibleColors } from '../utils/getTopCompatibleColors'
+import { imageQuality } from '../utils/qualitiesTransform'
 import { ITransformFormData } from './responseCld.type'
-import { uploadCloudinaryBase64 } from './utils/cld'
-import { getTopCompatibleColors } from './utils/getTopCompatibleColors'
-import { imageQuality } from './utils/qualitiesTransform'
 
 export async function POST(req: Request) {
   try {
@@ -41,7 +41,7 @@ export async function POST(req: Request) {
       }
     })
     if (!imageModel) throw new Error('Error saving image')
-    return NextResponse.json({ saveImage })
+    return NextResponse.json(imageModel)
   } catch (error: any) {
     console.log(error)
     return new Response(`Internal Error: ${String(error.message)}`, { status: 500 })

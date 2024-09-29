@@ -1,3 +1,4 @@
+import Chest from '@/shared/ui/icons/Chest'
 import {
   BaggageClaimIcon,
   BookImageIcon,
@@ -17,6 +18,15 @@ export type TTransformations =
   | 'buy-credits'
 
 const dashboardLinks = {
+  chess: {
+    Labrada: 'Archivos',
+    route: '/files',
+    Icon: Chest,
+    shortTitle: 'Archivos',
+    expressionInfo: 'Examinemos que guardas en tus archivos. 🌟',
+    description:
+      'Esta pagina te permitirá poder analizar tu imágenes almacenadas en tu cuenta de usuario.'
+  },
   home: {
     label: 'Inicio',
     route: '/',

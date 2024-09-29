@@ -24,7 +24,7 @@ const Publication = ({ publication }: IPublication): JSX.Element => {
   const { photo, username, firstName } = author
   const userName = username ?? firstName ?? ''
   return (
-    <Link href={`/image/${String(id)}`} className='dPublication'>
+    <Link href={`/transform/result/${String(id)}`} className='dPublication'>
       <CldImageComponent publicId={publicId} alt={title} className='dPublication-image' />
       <p className='dPublication-transformation'>{transformationType}</p>
       <button className='dPublication-user'>

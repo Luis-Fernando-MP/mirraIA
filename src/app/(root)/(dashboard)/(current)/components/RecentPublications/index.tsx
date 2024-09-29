@@ -7,7 +7,7 @@ import { type JSX } from 'react'
 import CommunityPublications from '../CommunityPublications'
 
 const RecentPublications = (): JSX.Element | null => {
-  const { data } = useImages({ query: imagesFilter.community.query(), limit: 10, page: 1 })
+  const { data } = useImages({ where: imagesFilter.community.query() as any, limit: 25, page: 1 })
   if (!data) return null
   return <CommunityPublications community={data} />
 }

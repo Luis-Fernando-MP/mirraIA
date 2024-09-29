@@ -4,18 +4,19 @@ import { UploadApiOptions } from 'cloudinary'
 import { randomUUID } from 'crypto'
 import { Stream } from 'stream'
 
-import { CldImageResponse } from '../responseCld.type'
+import { CldImageResponse } from '../image/responseCld.type'
 
 interface ISaveImage {
   url: string
-  author: string
+  author: number
+  nameInit?: string
   options?: UploadApiOptions
 }
-export const cldSaveImage = async ({ url, author, options }: ISaveImage) => {
+export const uploadLinkImage = async ({ url, author, nameInit = '', options }: ISaveImage) => {
   try {
     const saveImage = await cloudinary.uploader.upload(url, {
       colors: true,
-      public_id: `${CLD_FOLDER}/${author}/${randomUUID()}`,
+      public_id: `${CLD_FOLDER}/user-${author}/${nameInit}${randomUUID()}`,
       ...options
     })
     if (!saveImage) throw new Error('Error saving image')
@@ -34,7 +35,7 @@ export const uploadCloudinaryStream = async ({
   arrayBuffer
 }: IUploadCloudinaryStream): Promise<CldImageResponse> => {
   const buffer = Buffer.from(arrayBuffer)
-  const tmpID = `${CLD_FOLDER}/${author}/transformed-${randomUUID()}`
+  const tmpID = `${CLD_FOLDER}/user-${author}/${randomUUID()}`
   return await new Promise((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(
       {
@@ -58,7 +59,7 @@ export const uploadCloudinaryBase64 = async ({
 }: IUploadCloudinaryStream): Promise<CldImageResponse> => {
   try {
     const buffer = Buffer.from(arrayBuffer)
-    const tmpID = `${CLD_FOLDER}/user-${String(author)}/transformed-${randomUUID()}`
+    const tmpID = `${CLD_FOLDER}/user-${String(author)}/${randomUUID()}`
 
     const uploadResponse = await cloudinary.uploader.upload(
       `data:image/jpeg;base64,${buffer.toString('base64')}`,

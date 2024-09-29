@@ -29,7 +29,7 @@ const RootLayout = async ({ children }: IRootLayout): Promise<JSX.Element> => {
         className={`${MontserratFont.variable} ${RobotoFont.variable} ${PlayFairFont.variable}`}
       >
         <Providers>{children}</Providers>
-        <Toaster position='top-center' reverseOrder />
+        <Toaster position='top-center' reverseOrder gutter={3} />
       </body>
     </html>
   )

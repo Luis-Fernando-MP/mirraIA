@@ -61,12 +61,11 @@
       background-color: transparent;
       border-left: 1px solid v.$bg3;
       padding-left: v.$padding * 0.8;
+      @include t.pointers;
     }
     &__link {
       @include d.flex;
       justify-content: center;
-      font-weight: 700;
-      @include t.pointers;
     }
     &.color {
       flex-direction: column;

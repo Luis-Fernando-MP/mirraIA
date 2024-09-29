@@ -1,6 +1,10 @@
+'use client'
+
 import userStore from '@/app/(root)/(dashboard)/user.state'
+import { useCreateImage } from '@/db/hooks/useImages'
 import { ESTATE } from '@/shared/lib/constants'
 import axios from 'axios'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
@@ -10,6 +14,9 @@ import { ITransformResolver, transformResolver } from './transform.resolver'
 const useTransformForm = () => {
   const user = userStore()
   const [loading, setLoading] = useState<ESTATE>(ESTATE.SLATE)
+  const { mutateAsync } = useCreateImage()
+  const router = useRouter()
+
   const { register, handleSubmit, formState, setValue, watch, trigger } =
     useForm<ITransformResolver>({
       mode: 'onChange',
@@ -50,11 +57,12 @@ const useTransformForm = () => {
     const toastId = toast.loading('Cargando...', { id: 'transformImage' })
 
     try {
-      const response = await axios.post('/api/transform/image', formData)
-      console.info('response', response)
+      const res = await mutateAsync(formData)
       toast.success('Tus imágenes sean cargado', {
         id: toastId
       })
+      if (!res) throw new Error('no information')
+      router.push(`/transform/result/${res.id}`)
     } catch (error: any) {
       setLoading(ESTATE.ERROR)
       toast.error('Algo a salido mal ', { id: toastId })

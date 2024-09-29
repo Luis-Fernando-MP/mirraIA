@@ -1,8 +1,7 @@
 'use server'
 
 import { handleError } from '@/shared/lib/utils'
-import { Image } from '@prisma/client'
-import { FilterQuery } from 'mongoose'
+import { Image, Prisma } from '@prisma/client'
 
 import prisma from '..'
 
@@ -13,8 +12,6 @@ interface IAddImage {
 
 export async function addImage({ image, userId }: IAddImage) {
   try {
-    console.log(image)
-
     const author = await prisma.user.findUnique({
       where: { id: userId }
     })
@@ -61,17 +58,17 @@ export interface IGetAllImage extends Omit<Image, 'author'> {
 }
 
 export interface IImagesByFilter {
-  query: FilterQuery<Image>
+  where: Prisma.ImageWhereInput
   limit?: number
   page?: number
 }
 
-export async function getImagesByQuery({ query, limit = 9, page = 1 }: IImagesByFilter) {
+export async function getImagesByQuery({ where, limit = 9, page = 1 }: IImagesByFilter) {
   try {
     const pagination = (Number(page) - 1) * limit
 
     const images = await prisma.image.findMany({
-      where: query,
+      where,
       orderBy: {
         updatedAt: 'desc'
       },
@@ -90,7 +87,7 @@ export async function getImagesByQuery({ query, limit = 9, page = 1 }: IImagesBy
       }
     })
     const totalImages = await prisma.image.count({
-      where: query
+      where
     })
     return {
       images: images as IGetAllImage[],

@@ -80,6 +80,8 @@ async function handler(req: Request) {
 
     return new Response('Some...', { status: 200 })
   } catch (error) {
+    console.log(error)
+
     return new Response('Internal Error', { status: 500 })
   }
 }

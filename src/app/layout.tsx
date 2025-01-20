@@ -3,8 +3,11 @@ import type { Metadata } from 'next'
 import type { JSX, ReactNode } from 'react'
 import { Toaster } from 'react-hot-toast'
 
+import Header from './(dashboard)/components/Header'
+import Nav from './(dashboard)/components/Nav'
 import './globals.css'
 import './index.scss'
+import './mobile.scss'
 import Providers from './providers'
 
 interface IRootLayout {
@@ -28,7 +31,15 @@ const RootLayout = async ({ children }: IRootLayout): Promise<JSX.Element> => {
       <body
         className={`${MontserratFont.variable} ${RobotoFont.variable} ${PlayFairFont.variable}`}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <main className='dashboard'>
+            <Header />
+            <section className='dashboard-container'>
+              <Nav />
+              {children}
+            </section>
+          </main>
+        </Providers>
         <Toaster position='top-center' reverseOrder gutter={3} />
       </body>
     </html>

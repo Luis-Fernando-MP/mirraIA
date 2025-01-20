@@ -1,34 +1,27 @@
 import { Prisma } from '@prisma/client'
-import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { useEffect, useRef } from 'react'
 
 import { getUserFiles } from '../service/files'
 
-// Importa correctamente el tipo Prisma
-
 export const IMAGES_NAME_CACHE = 'USER_FILE_IMAGES'
 
 export function useFiles({ where }: { where?: Prisma.ImageWhereInput }) {
-  const queryClient = useQueryClient()
-
   // Usamos useInfiniteQuery para manejar el scroll infinito
   const query = useInfiniteQuery({
     queryKey: [IMAGES_NAME_CACHE, { where }],
     queryFn: async ({ pageParam = 1 }) => {
-      const res = await getUserFiles({ where: where ?? {}, limit: 5, page: Number(pageParam ?? 1) })
-      console.log('query -- -- ', res)
-
+      const res = await getUserFiles({
+        where: where ?? {},
+        limit: 5,
+        page: Number(pageParam ?? 1)
+      })
       return res
     },
     getNextPageParam: (lastPage, allPages) => {
-      console.log('lastPage --- - - ', lastPage)
-      console.log('allPages --- - - ', allPages)
-
-      // Lógica para determinar si hay más páginas:
-      // if (lastPage.length === limit) {
-      //   return allPages.length + 1 // Página siguiente
-      // }
-      // return undefined // No hay más páginas
+      // Asume que lastPage tiene un campo que indica si hay más páginas
+      // Por ejemplo, lastPage.hasMore podría indicar si hay más datos
+      return lastPage.hasMore ? allPages.length + 1 : undefined
     },
     staleTime: 500,
     retry: 5,

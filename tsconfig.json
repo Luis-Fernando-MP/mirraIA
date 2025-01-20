@@ -22,7 +22,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@sass/*": ["./src/sass/*"],
-      "@/dashboard/*": ["./src/app/(root)/(dashboard)/*"]
+      "@dashboard/*": ["./src/app/(dashboard)/*"],
+      "@transform/*": ["./src/app/(dashboard)/(pages)/transform/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
